@@ -40,7 +40,7 @@ export default function Projects() {
       <p
         className={`${poppins} grow lg:text-[32px] text-[20px] text-black/50 mt-[20px] mb-[40px]`}
       >
-        Personal projects I've built so far
+        Personal projects I&apos;ve built so far
       </p>
 
       <div

@@ -12,7 +12,7 @@ export default function AboutMe() {
       <p
         className={`${poppins} grow lg:text-[32px] text-[20px] text-black/50 mt-[20px] mb-[40px]`}
       >
-        I'm a third-year Computer Science student at University of Indonesia, specializing in Fullstack Web Development. Passionate to learn new
+        I&apos;m a third-year Computer Science student at University of Indonesia, specializing in Fullstack Web Development. Passionate to learn new
         technologies and improve both my hard and soft skills. Take a look at my resume to learn more!
       </p>
       <a 
