@@ -31,7 +31,7 @@ export function EducationSection() {
                   <div className="p-5 sm:p-7">
                     <p className="label">Academic record</p>
                     <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-                      {e.degree} · {e.field}
+                      {e.degree}
                     </h3>
                     <p className="mt-2 text-ink-muted">
                       {e.institution}

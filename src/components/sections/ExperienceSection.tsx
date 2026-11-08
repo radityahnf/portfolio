@@ -102,6 +102,12 @@ function TimelineEntry({ job, index, total }: { job: Experience; index: number; 
         </header>
         <div className="p-5 sm:p-6">
           <p className="label mb-3">{job.summary}</p>
+          {job.impact && (
+            <div className="mb-5 flex items-center gap-4 rounded-lg border border-cyan/25 bg-cyan/[0.05] px-4 py-3">
+              <span className="font-display text-3xl font-semibold tracking-tight text-cyan">{job.impact.value}</span>
+              <span className="font-mono text-[11px] uppercase leading-snug tracking-[0.08em] text-ink-muted">{job.impact.label}</span>
+            </div>
+          )}
           <ul className="space-y-2.5">
             {job.highlights.map((h) => (
               <li key={h} className="flex gap-3 text-[15px] leading-relaxed text-ink-muted">

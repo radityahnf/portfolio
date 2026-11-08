@@ -116,6 +116,8 @@ export interface Experience {
   type: string;
   summary: string;
   highlights: string[];
+  /** Optional headline metric — only use numbers stated on the CV. */
+  impact?: { value: string; label: string };
   stack: string[];
 }
 

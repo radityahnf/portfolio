@@ -120,7 +120,7 @@ function DesktopNav({ active }: { active: string }) {
                     transition={{ type: "spring", stiffness: 380, damping: 34 }}
                   />
                 )}
-                <span className={cn("relative hidden text-[10px] 2xl:inline", isActive ? "text-cyan" : "text-ink-faint")}>{s.code}</span>
+                <span className={cn("relative hidden text-[10px] min-[1600px]:inline", isActive ? "text-cyan" : "text-ink-faint")}>{s.code}</span>
                 <span className="relative">{s.label}</span>
               </a>
             </li>
