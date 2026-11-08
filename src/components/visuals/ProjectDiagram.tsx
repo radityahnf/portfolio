@@ -32,7 +32,7 @@ export function ProjectDiagram({
     >
       <defs>
         <pattern id={`grid-${id}`} width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M20 0H0V20" fill="none" stroke="rgba(238,240,245,0.04)" strokeWidth="1" />
+          <path d="M20 0H0V20" fill="none" stroke="rgba(232,227,220,0.04)" strokeWidth="1" />
         </pattern>
       </defs>
       <rect width={W} height={H} fill={`url(#grid-${id})`} />
@@ -46,7 +46,7 @@ export function ProjectDiagram({
         const d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
         return (
           <g key={`${a}-${b}`}>
-            <path d={d} fill="none" stroke="rgba(238,240,245,0.18)" strokeWidth="1" />
+            <path d={d} fill="none" stroke="rgba(232,227,220,0.22)" strokeWidth="1" />
           </g>
         );
       })}
@@ -60,24 +60,24 @@ export function ProjectDiagram({
         const h = 22;
         return (
           <g key={n.id} transform={`translate(${x - w / 2}, ${y - h / 2})`}>
-            <rect width={w} height={h} rx="6" fill="#11141c" />
+            <rect width={w} height={h} rx="1" fill="#141414" />
             <rect
               width={w}
               height={h}
-              rx="6"
-              fill={owned ? accent : core ? "#1a1e28" : "#11141c"}
-              fillOpacity={owned ? 0.14 : 1}
-              stroke={owned ? accent : core ? "rgba(238,240,245,0.28)" : "rgba(238,240,245,0.14)"}
+              rx="1"
+              fill={owned ? accent : core ? "#1d1c1b" : "#141414"}
+              fillOpacity={owned ? 0.9 : 1}
+              stroke={owned ? accent : core ? "rgba(232,227,220,0.45)" : "rgba(232,227,220,0.18)"}
               strokeWidth="1"
             />
-            {n.kind === "data" && <path d={`M6 ${h / 2 - 3}h6M6 ${h / 2 + 3}h6`} stroke="rgba(238,240,245,0.35)" strokeWidth="1" />}
+            {n.kind === "data" && <path d={`M6 ${h / 2 - 3}h6M6 ${h / 2 + 3}h6`} stroke="rgba(232,227,220,0.4)" strokeWidth="1" />}
             <text
               x={w / 2 + (n.kind === "data" ? 6 : 0)}
               y={h / 2 + 3.5}
               textAnchor="middle"
               fontFamily='"IBM Plex Mono", ui-monospace, monospace'
               fontSize={fs}
-              fill={owned || core ? "#eef0f5" : "#a3a9b8"}
+              fill={owned || core ? "#E8E3DC" : "#B4AEA7"}
             >
               {n.label}
             </text>

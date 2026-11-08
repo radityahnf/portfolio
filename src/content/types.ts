@@ -26,6 +26,9 @@ export interface Profile {
   /** IANA time zone used by the local-time readout. */
   timeZone: string;
   timeZoneLabel: string;
+  city: string;
+  coordinates: [string, string];
+  ja: { name: string; seal: string; role: string };
   email: string;
   cvPath: string;
   links: {

@@ -34,6 +34,15 @@ export const profile: Profile = {
   location: "Indonesia",
   timeZone: "Asia/Jakarta",
   timeZoneLabel: "WIB",
+  city: "Jakarta",
+  /** Shown as corner metadata, like a film's location card. */
+  coordinates: ["6.2088° S", "106.8456° E"],
+  /** Japanese forms, used as small typographic accents. */
+  ja: {
+    name: "ムハンマド・ラディティヤ・ハニフ",
+    seal: "ハニフ",
+    role: "バックエンドエンジニア",
+  },
   email: "ferdar7@gmail.com",
   cvPath: "/cv/Muhammad_Raditya_Hanif_CV.pdf",
   links: {
@@ -162,7 +171,7 @@ export const projects: Project[] = [
     status: "COMPLETED",
     year: "2022",
     type: "University team project · 5 engineers",
-    accent: "#4D8DFF",
+    accent: "#A30D17",
     summary:
       "A web platform where Indonesians recommend attractions, local shops, events and travel tips to foreign tourists, built around Indonesia's 2022 G20 presidency.",
     problem:
@@ -223,7 +232,7 @@ export const projects: Project[] = [
     status: "COMPLETED",
     year: "2024",
     type: "Personal project",
-    accent: "#4D8DFF",
+    accent: "#A30D17",
     summary:
       "A recreation of the NextShark news front page, with top stories, a story carousel and category tabs, built with Next.js, TypeScript and Tailwind CSS.",
     problem:

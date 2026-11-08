@@ -4,51 +4,55 @@ import { ArrowUpRight } from "@/components/ui/Icons";
 
 export function EducationSection() {
   return (
-    <section id="education" aria-labelledby="edu-title" className="pb-24 sm:pb-32">
-      <div className="shell grid gap-4 md:grid-cols-[200px_1fr]">
-        <h2 id="edu-title" className="text-xl font-medium text-ink md:pr-8 md:pt-6 md:text-right">
-          Education
-        </h2>
-        <Reveal className="grid gap-4 md:ml-8">
+    <section id="education" aria-labelledby="edu-title" className="relative pb-8 sm:pb-12">
+      <div className="shell">
+        <Reveal>
+          <div className="flex items-baseline justify-between gap-6 pb-4">
+            <h2 id="edu-title" className="meta">
+              <span className="text-ink">04.1</span>
+              <span className="mx-3 text-ink-3/60">—</span>
+              Education
+            </h2>
+            <p lang="ja" className="font-serif text-sm tracking-[0.3em] text-ink-3">
+              学歴
+            </p>
+          </div>
+          <div className="rule" />
           {education.map((e) => (
-            <article key={e.institution} className="card flex flex-col justify-between gap-4 p-6 sm:flex-row sm:items-center sm:p-8">
+            <div key={e.institution} className="grid gap-4 border-b border-line py-10 md:grid-cols-[220px_1fr] md:gap-12">
+              <p className="font-mono text-sm uppercase tracking-[0.12em] text-ink tabular-nums">
+                {e.start} — {e.end}
+              </p>
               <div>
-                <h3 className="text-lg font-medium text-ink">{e.degree}</h3>
-                <p className="mt-1 text-ink-2">
-                  {e.institution} <span className="text-ink-3">· {e.location}</span>
+                <p className="display text-4xl text-ink sm:text-5xl">{e.degree}</p>
+                <p className="mt-3 font-serif text-xl text-ink-2">
+                  {e.institution}
+                  <span className="ml-3 font-sans text-sm text-ink-3">{e.location}</span>
                 </p>
                 {e.notes.map((n) => (
-                  <p key={n} className="mt-2 text-sm text-ink-2">
+                  <p key={n} className="mt-3 text-ink-2">
                     {n}
                   </p>
                 ))}
               </div>
-              <p className="font-mono text-sm tabular-nums text-ink-2">
-                {e.start} – {e.end}
-              </p>
-            </article>
+            </div>
           ))}
-
-          {certifications.length > 0 && (
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {certifications.map((c) => (
-                <li key={c.name} className="card p-6">
-                  <p className="meta">
-                    {c.issuer} · {c.year}
-                  </p>
-                  <p className="mt-2 text-ink">
-                    {c.url ? (
-                      <a href={c.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 transition-colors duration-fast hover:text-accent">
-                        {c.name} <ArrowUpRight />
-                      </a>
-                    ) : (
-                      c.name
-                    )}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
+          {certifications.map((c) => (
+            <div key={c.name} className="grid gap-4 border-b border-line py-8 md:grid-cols-[220px_1fr] md:gap-12">
+              <p className="meta">
+                {c.issuer} · {c.year}
+              </p>
+              <p className="font-serif text-xl text-ink">
+                {c.url ? (
+                  <a href={c.url} target="_blank" rel="noopener noreferrer" className="ink-link pb-1">
+                    {c.name} <ArrowUpRight className="inline" />
+                  </a>
+                ) : (
+                  c.name
+                )}
+              </p>
+            </div>
+          ))}
         </Reveal>
       </div>
     </section>

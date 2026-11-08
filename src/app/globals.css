@@ -10,56 +10,81 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background: #0b0d14;
+    background: #090909;
   }
   body {
-    @apply bg-page font-sans text-[15px] leading-relaxed text-ink antialiased;
+    @apply bg-obsidian font-sans text-[15px] leading-relaxed text-ink antialiased;
     overflow-x: clip;
   }
   section[id] {
-    scroll-margin-top: 64px;
+    scroll-margin-top: 72px;
   }
   ::selection {
-    background: rgba(77, 141, 255, 0.3);
-    color: #fff;
+    background: #a30d17;
+    color: #e8e3dc;
   }
   :focus-visible {
-    outline: 2px solid #4d8dff;
-    outline-offset: 2px;
-    border-radius: 6px;
+    outline: 1px solid #e8e3dc;
+    outline-offset: 4px;
   }
 }
 
 @layer components {
   .shell {
-    @apply mx-auto w-full max-w-shell px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-12;
   }
-  /* Quiet meta text: mono, sentence case, muted */
+  /* Tiny tracked uppercase metadata */
   .meta {
-    @apply font-mono text-xs leading-4 text-ink-3;
+    @apply font-mono text-[11px] uppercase leading-4 tracking-[0.18em] text-ink-3;
   }
-  .card {
-    @apply rounded-2xl border border-line bg-card;
+  /* Oversized condensed display type */
+  .display {
+    @apply font-display font-normal uppercase leading-[0.94] tracking-[0.005em];
   }
-  .tag {
-    @apply inline-flex items-center rounded-md border border-line bg-raised px-2 py-1 font-mono text-xs leading-4 text-ink-2;
+  /* Outlined display line, paired with a solid line above it */
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(232, 227, 220, 0.62);
+  }
+  .vertical {
+    writing-mode: vertical-rl;
+  }
+  /* Thin editorial rule */
+  .rule {
+    @apply h-px w-full bg-line;
+  }
+  /* Link with an underline that draws in on hover */
+  .ink-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition:
+      background-size 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.3s ease;
+  }
+  .ink-link:hover,
+  .ink-link:focus-visible {
+    background-size: 100% 1px;
   }
 }
 
-/* Intro: hidden when skipped (set before paint) and auto-hidden as a failsafe
-   if scripts never run. */
-html[data-intro="skip"] .nexus-intro {
-  display: none;
+/* Film grain over everything — static, so it costs nothing while scrolling */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
-.nexus-intro {
-  animation: introFailsafe 0.3s ease 6s forwards;
-}
-@keyframes introFailsafe {
-  to {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
+
+/* Aged paper fibre for a few surfaces */
+.paper {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.02 0.6' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.88  0 0 0 0 0.85  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
+    linear-gradient(#141414, #141414);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -69,6 +94,7 @@ html[data-intro="skip"] .nexus-intro {
   *,
   *::before,
   *::after {
+    animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
 }

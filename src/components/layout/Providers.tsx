@@ -1,12 +1,8 @@
 "use client";
 
 import { MotionConfig } from "framer-motion";
-import { IntroProvider } from "./IntroSequence";
 
+/** Framer Motion follows the visitor's reduced-motion setting everywhere. */
 export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <MotionConfig reducedMotion="user">
-      <IntroProvider>{children}</IntroProvider>
-    </MotionConfig>
-  );
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

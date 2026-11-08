@@ -51,3 +51,6 @@ export const LinkedIn = (p: SVGProps<SVGSVGElement>) => (
     <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-.95 1.84-1.95 3.8-1.95 4.06 0 4.82 2.55 4.82 5.87v5.58h-4v-4.95c0-1.18-.02-2.7-1.72-2.7-1.72 0-1.98 1.27-1.98 2.6v5.05h-4v-11Z" />
   </svg>
 );
+export const ArrowDown = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}><path d="M12 5v14M6 13l6 6 6-6" /></svg>
+);

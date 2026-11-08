@@ -1,23 +1,28 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { experience } from "@/content/profile";
 import type { Experience } from "@/content/types";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal } from "@/components/ui/Reveal";
-import { cn } from "@/lib/cn";
+import { SectionHead } from "@/components/ui/SectionHead";
+import { EASE, VIEWPORT } from "@/lib/motion";
 
 export function ExperienceSection() {
   return (
-    <section id="experience" aria-labelledby="exp-title" className="py-24 sm:py-32">
+    <section id="experience" aria-labelledby="exp-title" className="relative py-28 sm:py-40">
       <div className="shell">
-        <SectionHeader
-          index="04"
-          label="Experience"
+        <SectionHead
+          section="experience"
           titleId="exp-title"
-          title="From QA automation to backend engineering"
-          description="QA intern, backend intern, Odoo developer, now Traveloka."
+          lines={[{ text: "From QA automation" }, { text: "to backend", outline: true }]}
+          aside={<p className="font-serif leading-[1.8] text-ink-2">QA intern, backend intern, Odoo developer, now Traveloka.</p>}
         />
 
-        <ol className="relative">
-          <span aria-hidden className="absolute bottom-0 left-[3px] top-2 w-px bg-line md:left-[203px]" />
+        {/* Column headings, like an archive ledger */}
+        <div className="meta hidden grid-cols-[220px_1fr] gap-12 border-b border-line-strong pb-4 md:grid">
+          <span>Period</span>
+          <span>Role and record</span>
+        </div>
+        <ol>
           {experience.map((job) => (
             <Entry key={job.id} job={job} />
           ))}
@@ -30,57 +35,61 @@ export function ExperienceSection() {
 function Entry({ job }: { job: Experience }) {
   const current = job.end === null;
   return (
-    <li className="relative grid gap-3 pb-8 pl-8 last:pb-0 md:grid-cols-[200px_1fr] md:gap-0 md:pl-0">
-      <span
-        aria-hidden
-        className={cn(
-          "absolute left-0 top-2 h-[7px] w-[7px] rounded-full md:left-[200px] md:top-8",
-          current ? "bg-accent" : "border border-ink-3 bg-page",
-        )}
-      />
-      <div className="md:pr-8 md:pt-6 md:text-right">
-        <p className="font-mono text-sm tabular-nums text-ink">
-          {job.start} – {job.end ?? "Present"}
+    <motion.li
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT}
+      transition={{ duration: 1, ease: EASE }}
+      className="grid gap-6 border-b border-line py-12 md:grid-cols-[220px_1fr] md:gap-12 md:py-16"
+    >
+      <div className="flex items-baseline justify-between gap-4 md:block">
+        <p className="font-mono text-sm uppercase tracking-[0.12em] text-ink tabular-nums">
+          {job.start} — {job.end ?? "Present"}
         </p>
-        <p className="meta mt-1">{job.type}</p>
+        <p className="meta md:mt-2">{job.type}</p>
+        {current && (
+          <p className="mt-4 hidden items-center gap-2 md:flex">
+            <span lang="ja" className="border border-blood px-1.5 py-0.5 font-serif text-xs text-blood-bright">
+              現職
+            </span>
+            <span className="meta">Current</span>
+          </p>
+        )}
       </div>
 
-      <Reveal className="md:ml-8">
-        <article className="card p-6 sm:p-8">
-          <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="text-xl font-medium text-ink">{job.role}</h3>
-            {current && <span className="meta text-ink-2">Current role</span>}
-          </header>
-          <p className="mt-1 text-ink-2">
-            {job.company} <span className="text-ink-3">· {job.location}</span>
-          </p>
+      <div>
+        <h3 className="display text-[clamp(2.5rem,5vw,4.5rem)] text-ink">{job.role}</h3>
+        <p className="mt-3 font-serif text-xl text-ink-2">
+          {job.company}
+          <span className="ml-3 font-sans text-sm text-ink-3">{job.location}</span>
+        </p>
 
-          {job.impact && (
-            <p className="mt-6 flex items-baseline gap-3 border-l-2 border-accent pl-4">
-              <span className="text-[32px] font-medium leading-none tabular-nums text-accent">{job.impact.value}</span>
-              <span className="text-sm text-ink-2">{job.impact.label}</span>
-            </p>
-          )}
-
-          <ul className="mt-6 space-y-3">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_220px] lg:gap-16">
+          <ul className="space-y-4">
             {job.highlights.map((h) => (
-              <li key={h} className="flex gap-3 text-pretty text-ink-2">
-                <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-ink-3" />
+              <li key={h} className="grid grid-cols-[20px_1fr] text-pretty leading-[1.8] text-ink-2">
+                <span aria-hidden className="mt-3.5 h-px w-3 bg-ink-3" />
                 <span>{h}</span>
               </li>
             ))}
           </ul>
-          {job.stack.length > 0 && (
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Technologies used">
-              {job.stack.map((t) => (
-                <li key={t} className="tag">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          )}
-        </article>
-      </Reveal>
-    </li>
+
+          <div className="space-y-8">
+            {job.impact && (
+              <div>
+                <p className="display text-7xl text-blood-bright">{job.impact.value}</p>
+                <p className="meta mt-3 leading-5">{job.impact.label}</p>
+              </div>
+            )}
+            {job.stack.length > 0 && (
+              <div>
+                <p className="meta mb-2">Stack</p>
+                <p className="text-sm leading-[1.8] text-ink-2">{job.stack.join(" · ")}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.li>
   );
 }

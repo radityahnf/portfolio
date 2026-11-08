@@ -1,13 +1,13 @@
 # Muhammad Raditya Hanif — portfolio (project codename NEXUS)
 
-Personal portfolio of a backend software engineer. Quiet, engineering-tool look with one live detail (local time in Jakarta) and one visual moment (the rotating NEXUS core).
+Personal portfolio of a backend software engineer, art-directed as a dark Japanese cinematic world: ink-wash mountains, a blood-red sun and oversized editorial type.
 
 ## Stack
 - **Next.js 15** (App Router, static export-friendly) + **React 19** + **TypeScript**
 - **Tailwind CSS 3** for styling, design tokens in `tailwind.config.ts` and `src/app/globals.css`
 - **Framer Motion** for UI, scroll and modal animation
-- **Canvas 2D** hero visual (`src/components/visuals/NexusCore.tsx`) — a hand-rolled 3D projection, so no WebGL/three.js is needed and there's nothing to fall back from
-- Self-hosted fonts via Fontsource: IBM Plex Sans and IBM Plex Mono
+- **SVG** ink-wash scene and textures, generated deterministically in code
+- Self-hosted fonts via Fontsource: Anton, Shippori Mincho, IBM Plex Sans and IBM Plex Mono
 
 ## Run
 ```bash
@@ -34,13 +34,13 @@ Everything personal lives in **`src/content/profile.ts`** — profile, about pan
 - Live demo links could not be verified at build time; free-tier hosts may be offline.
 
 ## Design system
-The visual pass follows the [unslop](https://github.com/heydamir/unslop) method by Damir Sokolovsky ([@heydamir](https://x.com/heydamir), CC BY 4.0).
+Art direction: a dark, cinematic Japanese atmosphere (reference: the "The Wind Remembers" key art), built without characters or katana imagery.
 
-- **Direction:** exact, calm under load, a little dry. World: on-call runbooks, queue consoles and night-shift dashboards.
-- **Color:** one "ink" neutral ramp (`page`, `card`, `raised`, hairlines at 8%), three text roles (`ink`, `ink-2`, `ink-3`) and one accent (`#4D8DFF`) used for the logo mark, the active timeline dot, the key figure and "built by me" diagram nodes. No gradients, glows or grain.
-- **Type:** IBM Plex Sans for the interface, IBM Plex Mono for meta and figures. Weights 400 and 500, sentence case everywhere.
-- **Motion:** one easing curve, `cubic-bezier(0.22, 1, 0.36, 1)`. Hover 150ms, menus 200ms, entrances 300–400ms with an 8px rise. Nothing loops except the core.
-- **Signature:** the status dot with the local time in Jakarta, in the header.
+- **Color:** obsidian `#090909`, charcoal `#141414`, warm off-white text `#E8E3DC`, ash `#85817D`. Blood red `#A30D17` / crimson `#650B12` only for the sun, the name seal, the active nav mark, the key figure and hover moments.
+- **Type:** Anton for oversized condensed headlines (a solid line paired with an outlined one), Shippori Mincho for statements and the Japanese accents, IBM Plex Sans for body text, IBM Plex Mono for tiny tracked uppercase metadata.
+- **Japanese text:** only where it means something: the name in katakana, バックエンドエンジニア ("backend engineer"), and section labels (紹介 introduction, 技術 skills, 作品 works, 経歴 career, 学歴 education, 連絡 contact, 現職 current role).
+- **Texture:** ink-wash landscape, ink-bled sun and seal, film grain, faint seigaiha waves and paper fibre, all drawn in SVG (`src/components/visuals/Ink.tsx`, `InkScene.tsx`). No images or WebGL.
+- **Motion:** one slow ease (`cubic-bezier(0.16, 1, 0.3, 1)`). Headlines rise out of a mask, blocks fade up once, the landscape and the contact sun drift on scroll. Nothing loops. Everything respects reduced motion.
 
 ## Structure
 ```
@@ -48,16 +48,16 @@ src/
   app/            layout, page, global styles
   content/        profile.ts (all data) + types.ts
   components/
-    layout/       IntroSequence, Chrome (nav, local time, back-to-top), Footer, Providers
+    layout/       Chrome (nav, back-to-top), Footer, Providers
     sections/     Hero, About, Capabilities, Projects, ProjectDetail, Experience, Education, Contact
-    visuals/      NexusCore (3D canvas), ProjectDiagram (SVG)
-    ui/           Button, Icons, SectionHeader, Reveal, StatusDot
+    visuals/      Ink (filters, sun, seal, brush, waves), InkScene (hero landscape), ProjectDiagram
+    ui/           Button, Icons, SectionHead, Reveal
   lib/            motion presets, hooks (active section, clock), section map
 ```
 
 ## Behaviour notes
-- The intro plays once per browser session, can be skipped (button or Esc), and never plays with `prefers-reduced-motion`. It also hides itself if JavaScript fails.
-- Reduced motion: Framer Motion respects the OS setting, transitions are disabled, and the 3D core renders a single still frame.
+- No loading screen: content is in the HTML, and the hero headline animates in on load.
+- Reduced motion: Framer Motion respects the OS setting, CSS transitions are disabled, and the scroll parallax is turned off.
 - The core pauses when off-screen or when the tab is hidden.
 - Projects open in an accessible dialog (focus trap, Esc, focus restore). Deep link with `#mission-travelogue` or `#mission-nextshark`.
 - There's no contact form on purpose — email, LinkedIn and GitHub are real links, plus a copy-email button.

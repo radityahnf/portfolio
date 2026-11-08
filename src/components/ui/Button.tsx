@@ -1,39 +1,43 @@
 import { forwardRef, type AnchorHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "ghost";
-type Size = "md" | "sm";
+type Variant = "primary" | "text";
 
 interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   variant?: Variant;
-  size?: Size;
   icon?: ReactNode;
   external?: boolean;
 }
 
-export const buttonStyles = (variant: Variant = "primary", size: Size = "md") =>
-  cn(
-    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-[background-color,border-color,color,transform] duration-fast ease-out active:scale-[0.98]",
-    size === "md" ? "h-11 px-5 text-[15px]" : "h-9 px-4 text-sm",
-    variant === "primary" && "bg-ink text-page shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] hover:bg-white",
-    variant === "secondary" && "border border-line-strong bg-raised text-ink hover:border-ink-3/40 hover:bg-[#20242f]",
-    variant === "ghost" && "text-ink-2 hover:text-ink",
-  );
+/**
+ * Calls to action. `primary` is a thin framed button that floods with blood
+ * red on hover — one of the few places red appears. `text` is a quiet link
+ * whose underline draws in.
+ */
+export const ctaStyles = (variant: Variant = "primary") =>
+  variant === "primary"
+    ? "group relative inline-flex h-12 items-center justify-center gap-3 overflow-hidden border border-ink/40 px-6 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-colors duration-500 ease-cine hover:border-blood"
+    : "group inline-flex h-12 items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-ink-2 transition-colors duration-300 hover:text-ink";
 
-/** Link styled as a button. Every call to action on the site is a real link. */
-export const ButtonLink = forwardRef<HTMLAnchorElement, Props>(function ButtonLink(
-  { variant = "primary", size = "md", icon, external, className, children, ...rest },
+export const CtaLink = forwardRef<HTMLAnchorElement, Props>(function CtaLink(
+  { variant = "primary", icon, external, className, children, ...rest },
   ref,
 ) {
   return (
     <a
       ref={ref}
-      className={cn(buttonStyles(variant, size), className)}
+      className={cn(ctaStyles(variant), className)}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       {...rest}
     >
-      {children}
-      {icon}
+      {variant === "primary" && (
+        <span
+          aria-hidden
+          className="absolute inset-0 origin-left scale-x-0 bg-blood transition-transform duration-500 ease-cine group-hover:scale-x-100"
+        />
+      )}
+      <span className={cn("relative", variant === "text" && "ink-link pb-1")}>{children}</span>
+      {icon && <span className="relative transition-transform duration-500 ease-cine group-hover:translate-x-1">{icon}</span>}
     </a>
   );
 });
