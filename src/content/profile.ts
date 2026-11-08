@@ -65,11 +65,6 @@ export const about: About = {
     "I'm a backend engineer at Traveloka on the supply side of Travel Activities, mainly affiliate management and supplier payments. I also do production support for these systems.",
   panels: [
     {
-      id: "duplicates",
-      label: "On duplicates",
-      body: "Payments get retried and queues redeliver, so anything that moves money has to survive seeing the same message twice. For Payment-Per-Redemption I put a check at three points: SQS deduplication, a unique constraint in the database, and an invoice-state check before anything is paid. SQS only deduplicates within a short window, so the later checks catch what arrives after it.",
-    },
-    {
       id: "qa",
       label: "On testing",
       body: "I started in QA, writing regression tests for tiket.com's transport flows. It taught me to think about how things break.",
