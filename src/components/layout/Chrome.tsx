@@ -157,7 +157,7 @@ function MobileMenu({ open, active, onClose }: { open: boolean; active: string; 
                   >
                     <span className="flex items-baseline gap-4">
                       <span className={cn("font-mono text-[11px]", active === s.id ? "text-blood-bright" : "text-ink-3")}>{s.code}</span>
-                      <span className={cn("display text-5xl", active === s.id ? "text-ink" : "text-ink-2")}>{s.label}</span>
+                      <span className={cn("display text-3xl sm:text-4xl", active === s.id ? "text-ink" : "text-ink-2")}>{s.label}</span>
                     </span>
                     <span lang="ja" className="font-serif text-sm tracking-[0.3em] text-ink-3">
                       {s.ja}

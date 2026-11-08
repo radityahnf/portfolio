@@ -61,7 +61,7 @@ export function HeroSection() {
             {profile.ja.name}
           </span>
         </motion.p>
-        <h1 className="display text-[clamp(5rem,19vw,17rem)] text-ink">
+        <h1 className="display text-[clamp(3.5rem,14.5vw,13.5rem)] text-ink">
           <span className="sr-only">{profile.name}</span>
           <span aria-hidden className="block overflow-hidden pb-[0.03em]">
             <motion.span {...rise(0)} className="block">

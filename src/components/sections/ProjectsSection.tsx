@@ -92,7 +92,7 @@ function ProjectRow({ project: p, index, onOpen }: { project: Project; index: nu
         </div>
 
         <button type="button" onClick={onOpen} aria-haspopup="dialog" className="relative mt-8 self-start text-left">
-          <h3 className="display text-[clamp(3.5rem,8vw,7.5rem)] text-ink transition-transform duration-700 ease-cine group-hover:translate-x-2">
+          <h3 className="display text-[clamp(2.5rem,4.6vw,4.5rem)] text-ink transition-transform duration-700 ease-cine group-hover:translate-x-2">
             {p.name}
           </h3>
           <BrushStroke className="pointer-events-none absolute -bottom-2 left-0 h-4 w-full origin-left scale-x-0 transition-transform duration-700 ease-cine group-hover:scale-x-100" />

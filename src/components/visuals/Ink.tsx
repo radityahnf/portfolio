@@ -108,7 +108,7 @@ export function Seal({ text, className }: { text: string; className?: string }) 
           y={8 + step * (i + 0.5)}
           textAnchor="middle"
           dominantBaseline="central"
-          fontFamily='"Shippori Mincho", serif'
+          fontFamily='"Shippori Mincho B1", serif'
           fontSize={step * 0.9}
           fontWeight={500}
           fill="#090909"

@@ -45,7 +45,7 @@ export function SectionHead({ section, label, ja, index, titleId, lines, aside, 
       </motion.div>
       <motion.div variants={reveal} className="rule" />
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-        <h2 id={titleId} className="display text-[clamp(3.25rem,9vw,8.5rem)] text-ink">
+        <h2 id={titleId} className="display text-[clamp(2.25rem,6vw,6rem)] text-ink">
           {lines.map((l) => (
             <span key={l.text} className="block overflow-hidden pb-[0.04em]">
               <motion.span variants={lineRise} className={cn("block", l.outline && "outline-text")}>

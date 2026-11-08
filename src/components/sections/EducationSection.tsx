@@ -24,7 +24,7 @@ export function EducationSection() {
                 {e.start} — {e.end}
               </p>
               <div>
-                <p className="display text-4xl text-ink sm:text-5xl">{e.degree}</p>
+                <p className="display text-3xl text-ink sm:text-4xl">{e.degree}</p>
                 <p className="mt-3 font-serif text-xl text-ink-2">
                   {e.institution}
                   <span className="ml-3 font-sans text-sm text-ink-3">{e.location}</span>

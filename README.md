@@ -7,7 +7,7 @@ Personal portfolio of a backend software engineer, art-directed as a dark Japane
 - **Tailwind CSS 3** for styling, design tokens in `tailwind.config.ts` and `src/app/globals.css`
 - **Framer Motion** for UI, scroll and modal animation
 - **SVG** ink-wash scene and textures, generated deterministically in code
-- Self-hosted fonts via Fontsource: Anton, Shippori Mincho, IBM Plex Sans and IBM Plex Mono
+- Self-hosted fonts via Fontsource: Bodoni Moda, Newsreader, Shippori Mincho B1 and Azeret Mono
 
 ## Run
 ```bash
@@ -37,7 +37,7 @@ Everything personal lives in **`src/content/profile.ts`** — profile, about pan
 Art direction: a dark, cinematic Japanese atmosphere (reference: the "The Wind Remembers" key art), built without characters or katana imagery.
 
 - **Color:** obsidian `#090909`, charcoal `#141414`, warm off-white text `#E8E3DC`, ash `#85817D`. Blood red `#A30D17` / crimson `#650B12` only for the sun, the name seal, the active nav mark, the key figure and hover moments.
-- **Type:** Anton for oversized condensed headlines (a solid line paired with an outlined one), Shippori Mincho for statements and the Japanese accents, IBM Plex Sans for body text, IBM Plex Mono for tiny tracked uppercase metadata.
+- **Type ("Editorial Noir"):** Bodoni Moda ExtraBold for oversized headlines (a solid line paired with an engraved outline), Newsreader for all reading text, Shippori Mincho B1 for the Japanese accents, Azeret Mono for tiny tracked uppercase metadata.
 - **Japanese text:** only where it means something: the name in katakana, バックエンドエンジニア ("backend engineer"), and section labels (紹介 introduction, 技術 skills, 作品 works, 経歴 career, 学歴 education, 連絡 contact, 現職 current role).
 - **Texture:** ink-wash landscape, ink-bled sun and seal, film grain, faint seigaiha waves and paper fibre, all drawn in SVG (`src/components/visuals/Ink.tsx`, `InkScene.tsx`). No images or WebGL.
 - **Motion:** one slow ease (`cubic-bezier(0.16, 1, 0.3, 1)`). Headlines rise out of a mask, blocks fade up once, the landscape and the contact sun drift on scroll. Nothing loops. Everything respects reduced motion.
