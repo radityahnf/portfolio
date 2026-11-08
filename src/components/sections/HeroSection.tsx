@@ -41,7 +41,7 @@ export function HeroSection() {
         className="vertical meta absolute left-5 top-1/2 hidden -translate-y-1/2 rotate-180 lg:block"
         aria-hidden
       >
-        Payments get retried · Queues redeliver
+        Java · Spring Boot · AWS
       </motion.p>
       <motion.div
         {...fade(1.1)}

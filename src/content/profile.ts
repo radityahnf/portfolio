@@ -30,7 +30,7 @@ export const profile: Profile = {
   title: "Backend Software Engineer",
   focus: "Backend software engineer at Traveloka",
   intro:
-    "I build Java and Spring Boot services for production — payment flows that can't redeem a voucher twice, data that archives itself, and a guard that kills a runaway query before it eats the connection pool.",
+    "I build backend services in Java and Spring Boot at Traveloka, working on the supply side of Travel Activities.",
   location: "Indonesia",
   timeZone: "Asia/Jakarta",
   timeZoneLabel: "WIB",
@@ -62,7 +62,7 @@ export const profile: Profile = {
  */
 export const about: About = {
   summary:
-    "I'm a backend engineer at Traveloka, on Travel Activities: affiliate management, supplier payments, and the data and reliability work around them, including the production support that follows.",
+    "I'm a backend engineer at Traveloka on the supply side of Travel Activities, mainly affiliate management and supplier payments. I also do production support for these systems.",
   panels: [
     {
       id: "duplicates",
@@ -293,10 +293,10 @@ export const experience: Experience[] = [
     start: "Nov 2025",
     end: null,
     type: "Full-time",
-    summary: "Travel Activities: affiliates, supplier payments, data reliability",
+    summary: "Supply side of Travel Activities: affiliates and supplier payments",
     highlights: [
-      "Rebuilt Travel Activities' affiliate management system from the data model up: new data models, APIs, authorization flows, migration logic and a validation workflow.",
-      "Added Payment-Per-Redemption to supplier payments, so suppliers are paid per voucher redemption. Protected it against paying twice with SQS deduplication, a database unique constraint and invoice-state checks.",
+      "Rebuilt Travel Activities' affiliate management system, including its data models, APIs, authorization flows, data migration and validation workflow.",
+      "Added Payment-Per-Redemption to supplier payments, so suppliers are paid per voucher redemption. SQS deduplication, a database unique constraint and invoice-state checks prevent paying twice.",
       "Built a pipeline (EventBridge → Lambda → Glue → S3) that moves old rows out of a busy table on a schedule. The active table is now about 90% smaller.",
       "Built a guard for long-running SQL queries that could exhaust the connection pool and cause transaction failures. It kills them and reports them to Lark so they can be fixed.",
       "Moved our SQS, SNS and S3 code from AWS SDK v1 to v2. Each flow switched over behind a feature control, with compatibility tests.",

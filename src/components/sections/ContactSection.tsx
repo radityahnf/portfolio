@@ -58,8 +58,7 @@ export function ContactSection() {
           <motion.div variants={reveal} className="mt-14 grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-6">
               <p className="font-serif text-xl leading-[1.8] text-ink-2">
-                I&apos;m open to backend and software engineering roles, and happy to talk through payment flows, queues or data
-                pipelines. Email is the fastest way to reach me.
+                I&apos;m open to backend and software engineering roles. Email is the fastest way to reach me.
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
                 <CtaLink href={`mailto:${profile.email}`} icon={<ArrowUpRight />}>

@@ -16,7 +16,7 @@ export function AboutSection() {
         <SectionHead
           section="about"
           titleId="about-title"
-          lines={[{ text: "Backend that holds" }, { text: "up in production", outline: true }]}
+          lines={[{ text: "A bit" }, { text: "about me", outline: true }]}
         />
 
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">

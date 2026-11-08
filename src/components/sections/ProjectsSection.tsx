@@ -40,7 +40,7 @@ export function ProjectsSection() {
         <SectionHead
           section="projects"
           titleId="projects-title"
-          lines={[{ text: "Selected" }, { text: "works", outline: true }]}
+          lines={[{ text: "Selected" }, { text: "projects", outline: true }]}
           aside={
             <p className="font-serif leading-[1.8] text-ink-2">
               Most of my professional work lives in private company codebases. These two are a university team project and a personal one.
