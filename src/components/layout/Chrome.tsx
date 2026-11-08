@@ -70,12 +70,12 @@ export function Chrome() {
 
 function Logo() {
   return (
-    <a href="#home" className="flex items-center gap-2" aria-label="NEXUS, back to top">
+    <a href="#home" className="flex items-center gap-2" aria-label={`${profile.name}, back to top`}>
       <svg viewBox="0 0 24 24" className="h-5 w-5 text-accent" aria-hidden>
         <path d="M12 2.5 20.5 7.25v9.5L12 21.5l-8.5-4.75v-9.5L12 2.5Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         <path d="M12 7.5v9M8 9.75l8 4.5M16 9.75l-8 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
-      <span className="text-base font-medium tracking-[0.04em] text-ink">NEXUS</span>
+      <span className="text-base font-medium text-ink">{profile.shortName}</span>
     </a>
   );
 }

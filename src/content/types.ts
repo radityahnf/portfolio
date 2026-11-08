@@ -37,7 +37,8 @@ export interface Profile {
 export interface AboutPanel {
   id: string;
   label: string;
-  title: string;
+  /** Optional heading; leave out for a plain paragraph. */
+  title?: string;
   body: string;
 }
 
@@ -57,9 +58,7 @@ export interface Skill {
 
 export interface SkillCategory {
   id: string;
-  code: string;
   title: string;
-  description: string;
   skills: Skill[];
 }
 

@@ -13,7 +13,7 @@ export function ExperienceSection() {
           label="Experience"
           titleId="exp-title"
           title="From QA automation to backend engineering"
-          description="Four roles since 2024. Each one added a layer to how I build and support systems."
+          description="QA intern, backend intern, Odoo developer, now Traveloka."
         />
 
         <ol className="relative">

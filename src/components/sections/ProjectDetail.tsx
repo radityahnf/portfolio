@@ -134,7 +134,7 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
                   ))}
                 </ul>
               </Block>
-              <Block label="Key decisions">
+              <Block label="Decisions">
                 <div className="grid gap-3">
                   {p.decisions.map((d) => (
                     <div key={d.title} className="rounded-xl border border-line bg-base p-4">

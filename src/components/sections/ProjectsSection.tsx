@@ -40,7 +40,7 @@ export function ProjectsSection() {
           label="Projects"
           titleId="projects-title"
           title="Selected projects"
-          description="Each one written up like a case study: the problem, what I built and the decisions behind it."
+          description="Most of my professional work lives in private company codebases. These two are a university team project and a personal one."
         />
 
         <div className="grid gap-4">
@@ -61,7 +61,6 @@ export function ProjectsSection() {
           >
             GitHub
           </a>
-          . Most of my professional work lives in private company codebases.
         </p>
       </div>
 

@@ -13,14 +13,14 @@ const description = `${profile.name} — ${profile.title}. ${profile.intro}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${profile.name} · ${profile.title} — NEXUS`,
+  title: `${profile.name} · ${profile.title}`,
   description,
   authors: [{ name: profile.name }],
   openGraph: {
     type: "website",
     title: `${profile.name} · ${profile.title}`,
     description,
-    siteName: "NEXUS",
+    siteName: profile.name,
   },
   twitter: { card: "summary_large_image", title: `${profile.name} · ${profile.title}`, description },
 };

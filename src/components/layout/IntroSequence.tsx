@@ -14,9 +14,9 @@ const IntroContext = createContext<{ done: boolean }>({ done: true });
 export const useIntro = () => useContext(IntroContext);
 
 import { INTRO_STORAGE_KEY } from "@/lib/constants";
+import { profile } from "@/content/profile";
 const DURATION_MS = 1600;
 
-const BOOT_LINES = ["Loading profile", "Loading experience", "Loading projects", "Ready"];
 
 export function IntroProvider({ children }: { children: React.ReactNode }) {
   // `pending` until we know on the client whether to play the intro.
@@ -73,14 +73,13 @@ function IntroOverlay({ onDone, active }: { onDone: () => void; active: boolean 
   }, [active, onDone]);
 
   const pct = Math.round(progress * 100);
-  const visibleLines = Math.min(BOOT_LINES.length, Math.floor(progress * (BOOT_LINES.length + 1)));
 
   return (
     <motion.div
       className="nexus-intro fixed inset-0 z-[100] flex items-center justify-center bg-page"
       role="dialog"
       aria-modal="true"
-      aria-label="NEXUS intro"
+      aria-label="Intro"
       exit={{ opacity: 0, transition: { duration: 0.4, ease: EASE } }}
     >
       <motion.div
@@ -89,23 +88,12 @@ function IntroOverlay({ onDone, active }: { onDone: () => void; active: boolean 
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: EASE }}
       >
-        <div className="mb-6 flex items-end justify-between">
-          <p className="text-[40px] font-medium leading-none tracking-[0.04em] text-ink">NEXUS</p>
-          <p className="font-mono text-sm tabular-nums text-ink-2">{pct}%</p>
-        </div>
-
-        <div className="relative h-px w-full bg-line" aria-hidden>
+        {/* Not a loader: the page is already there underneath. Just a short title card. */}
+        <p className="text-[32px] font-medium leading-tight tracking-[-0.02em] text-ink sm:text-[40px]">{profile.name}</p>
+        <p className="meta mt-3">{profile.title}</p>
+        <div className="relative mt-8 h-px w-full bg-line" aria-hidden>
           <div className="absolute inset-y-0 left-0 bg-accent" style={{ width: `${pct}%` }} />
         </div>
-
-        <ul className="mt-6 h-24 space-y-2 font-mono text-xs text-ink-3" aria-live="off">
-          {BOOT_LINES.slice(0, visibleLines).map((line) => (
-            <li key={line} className="flex justify-between">
-              <span>{line}</span>
-              <span className="text-positive">ok</span>
-            </li>
-          ))}
-        </ul>
       </motion.div>
 
       <button

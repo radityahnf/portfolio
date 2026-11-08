@@ -1,4 +1,4 @@
-# NEXUS — Muhammad Raditya Hanif
+# Muhammad Raditya Hanif — portfolio (project codename NEXUS)
 
 Personal portfolio of a backend software engineer. Quiet, engineering-tool look with one live detail (local time in Jakarta) and one visual moment (the rotating NEXUS core).
 
@@ -22,7 +22,8 @@ Everything personal lives in **`src/content/profile.ts`** — profile, about pan
 
 - **CV**: replace `public/cv/Muhammad_Raditya_Hanif_CV.pdf` (or change `profile.cvPath`).
 - **Projects**: add an entry to `projects`. `outcomes`, `challenges` and `notes` are optional — empty blocks are hidden, so don't add filler.
-- **Skills**: each skill needs a `context` (where it was used) and a `source` (`cv`, `project`, `previous-portfolio`). There are deliberately no proficiency bars.
+- **Skills**: each skill needs a `context` (where it was used) and a `source` (`cv`, `project`, `previous-portfolio`). Tools without a concrete place of use go in `alsoUsed`, shown as one plain line. There are no proficiency bars.
+- **Voice**: About holds reasoning, Experience holds the facts. Avoid repeating the same achievement in several sections.
 - **Certifications**: add to `certifications`; the block appears automatically.
 
 ### Content sources & things to review

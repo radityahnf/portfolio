@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { skillCategories } from "@/content/profile";
+import { alsoUsed, skillCategories } from "@/content/profile";
 import type { Source } from "@/content/types";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 
-const SOURCES: { id: Source; label: string; dot: string }[] = [
-  { id: "cv", label: "Work and CV", dot: "bg-accent" },
+const ALL_SOURCES: { id: Source; label: string; dot: string }[] = [
+  { id: "cv", label: "Work", dot: "bg-accent" },
   { id: "project", label: "Projects", dot: "bg-ink-2" },
   { id: "previous-portfolio", label: "Earlier portfolio", dot: "border border-ink-3 bg-transparent" },
 ];
-const DOT = Object.fromEntries(SOURCES.map((s) => [s.id, s.dot])) as Record<Source, string>;
+// Only offer filters for sources that actually appear in the list.
+const SOURCES = ALL_SOURCES.filter((s) => skillCategories.some((c) => c.skills.some((k) => k.source === s.id)));
+const DOT = Object.fromEntries(ALL_SOURCES.map((s) => [s.id, s.dot])) as Record<Source, string>;
 
 export function CapabilitiesSection() {
   const [filter, setFilter] = useState<Source | "all">("all");
@@ -28,7 +30,6 @@ export function CapabilitiesSection() {
           label="Capabilities"
           titleId="cap-title"
           title="What I work with, and where I used it"
-          description="No skill bars or percentages. Each entry says where I actually used it."
         />
 
         <Reveal>
@@ -61,10 +62,7 @@ export function CapabilitiesSection() {
           <div className="card divide-y divide-line">
             {skillCategories.map((cat) => (
               <div key={cat.id} className="grid gap-4 p-6 md:grid-cols-[240px_1fr] md:gap-8">
-                <div>
-                  <h3 className="font-medium text-ink">{cat.title}</h3>
-                  <p className="mt-1 text-sm text-ink-3">{cat.description}</p>
-                </div>
+                <h3 className="font-medium text-ink">{cat.title}</h3>
                 <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2 xl:grid-cols-3">
                   {cat.skills.map((s) => {
                     const dim = filter !== "all" && s.source !== filter;
@@ -82,6 +80,12 @@ export function CapabilitiesSection() {
               </div>
             ))}
           </div>
+
+          {alsoUsed.length > 0 && (
+            <p className="mt-4 text-sm text-ink-3">
+              <span className="text-ink-2">Also used:</span> {alsoUsed.join(", ")}
+            </p>
+          )}
         </Reveal>
       </div>
     </section>

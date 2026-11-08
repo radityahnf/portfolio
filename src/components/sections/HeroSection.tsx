@@ -43,8 +43,8 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div {...item(3)} className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="#projects" icon={<ArrowRight />}>
-              Explore projects
+            <ButtonLink href="#experience" icon={<ArrowRight />}>
+              See my work
             </ButtonLink>
             <ButtonLink href={profile.cvPath} download variant="secondary" icon={<Download />}>
               Download CV

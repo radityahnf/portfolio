@@ -36,7 +36,7 @@ export function ContactSection() {
               <span className="text-ink-2">05</span> <span className="mx-1 text-line-strong">/</span> Contact
             </p>
             <h2 id="contact-title" className="text-balance text-[36px] font-medium leading-[1.1] tracking-[-0.02em] text-ink sm:text-[48px]">
-              Hiring for backend work? Let&apos;s talk
+              Open to backend roles
             </h2>
             <p className="mt-6 max-w-[36rem] text-pretty text-lg text-ink-2">
               I&apos;m open to backend and software engineering roles, and happy to talk through payment flows, queues or data

@@ -27,10 +27,10 @@ export const profile: Profile = {
   name: "Muhammad Raditya Hanif",
   shortName: "Raditya Hanif",
   initials: "MRH",
-  title: "Software Engineer",
+  title: "Backend Software Engineer",
   focus: "Backend software engineer at Traveloka",
   intro:
-    "I build Java and Spring Boot services for production — payment flows that can't redeem a voucher twice, data that archives itself, and guards that stop a runaway query before it takes the database down.",
+    "I build Java and Spring Boot services for production — payment flows that can't redeem a voucher twice, data that archives itself, and a guard that kills a runaway query before it eats the connection pool.",
   location: "Indonesia",
   timeZone: "Asia/Jakarta",
   timeZoneLabel: "WIB",
@@ -47,140 +47,110 @@ export const profile: Profile = {
 };
 
 /*
- * The panel texts below are written from what the CV shows (migrations with
- * feature-controlled rollout, observability work, a QA background).
- * Edit them freely so they sound like you.
+ * About carries reasoning, not achievements: the facts live in Experience.
+ * Extend the panels with things only you know (why you moved from QA to
+ * backend, what an incident taught you).
  */
 export const about: About = {
   summary:
-    "I'm a Computer Science graduate from the University of Indonesia, now a backend software engineer at Traveloka working on Travel Activities — affiliate management, supplier payments and the data and reliability work around them. Before that I built Odoo business apps, worked on caching and messaging at Tumbuh Bersama Nano, and started out in QA at Global Tiket Network.",
+    "I'm a backend engineer at Traveloka, on Travel Activities: affiliate management, supplier payments, and the data and reliability work around them, including the production support that follows.",
   panels: [
     {
-      id: "profile",
-      label: "Profile",
-      title: "Backend engineer, end-to-end",
-      body: "I own features from data model to production: API design, authorization, migrations, validation and the support that follows — most recently the full revamp of an affiliate management system.",
+      id: "duplicates",
+      label: "On duplicates",
+      body: "Payments get retried and queues redeliver, so anything that moves money has to survive seeing the same message twice. For Payment-Per-Redemption I put a check at three points: SQS deduplication, a unique constraint in the database, and an invoice-state check before anything is paid. SQS only deduplicates within a short window, so the later checks catch what arrives after it.",
     },
     {
-      id: "philosophy",
-      label: "Philosophy",
-      title: "Assume it will fail — then make it safe",
-      body: "Payments get retried and queues redeliver. When I added Payment-Per-Redemption, I guarded against duplicates at three layers: SQS deduplication, database unique constraints and invoice-state checks.",
-    },
-    {
-      id: "focus",
-      label: "Current focus",
-      title: "Data health and reliability",
-      body: "Automated archival that cut an active table's size by about 90%, and a guard that terminates long-running SQL queries before they exhaust the connection pool, then reports them to Lark.",
-    },
-    {
-      id: "approach",
-      label: "Approach",
-      title: "Change safely, test like QA",
-      body: "Starting in QA taught me to think about how things break. Big changes — like moving SQS, SNS and S3 flows to AWS SDK v2 — ship behind feature controls with compatibility testing.",
+      id: "qa",
+      label: "On testing",
+      body: "I started in QA, writing regression tests for tiket.com's transport flows. It taught me to think about how things break.",
     },
   ],
-  interests: [
-    "Distributed systems",
-    "Event-driven architecture",
-    "AWS & serverless pipelines",
-    "Database optimization",
-    "Observability",
-  ],
+  interests: [],
   facts: [
     { label: "Role", value: "Backend Software Engineer" },
     { label: "Company", value: "Traveloka" },
-    { label: "Degree", value: "B.CS., University of Indonesia" },
-    { label: "Roles held", value: "4 since 2024" },
+    { label: "Degree", value: "Computer Science, University of Indonesia" },
+    { label: "Open to", value: "Backend roles" },
   ],
 };
 
-/*
- * Skills marked "Listed on earlier CV" came from the skills section of the
- * previous CV (the latest CV has no skills section). Remove any you'd rather not show.
- */
+/** Skills with a concrete place they were used. */
 export const skillCategories: SkillCategory[] = [
   {
     id: "languages",
-    code: "MOD_01",
     title: "Programming languages",
-    description: "Languages used in production work and projects.",
     skills: [
       { name: "Java", context: "Traveloka · Tumbuh Bersama Nano · QA automation", source: "cv" },
-      { name: "SQL", context: "Query protection & optimization at Traveloka", source: "cv" },
+      { name: "SQL", context: "Query guard and optimization at Traveloka", source: "cv" },
       { name: "Python", context: "Odoo modules · TraveLoGue (Django)", source: "cv" },
       { name: "TypeScript", context: "NextShark Clone · this site", source: "project" },
-      { name: "Kotlin", context: "Listed on previous portfolio", source: "previous-portfolio" },
     ],
   },
   {
     id: "backend",
-    code: "MOD_02",
-    title: "Backend development",
-    description: "Frameworks and messaging for services and APIs.",
+    title: "Backend",
     skills: [
       { name: "Spring Boot", context: "Traveloka · Tumbuh Bersama Nano", source: "cv" },
       { name: "AWS SQS / SNS", context: "Deduplication · SDK v1 → v2 migration", source: "cv" },
       { name: "RabbitMQ", context: "Async messaging at Tumbuh Bersama Nano", source: "cv" },
       { name: "Odoo", context: "Custom business modules", source: "cv" },
       { name: "Django", context: "TraveLoGue", source: "project" },
-      { name: "Express", context: "Listed on previous portfolio", source: "previous-portfolio" },
     ],
   },
   {
     id: "frontend",
-    code: "MOD_03",
-    title: "Frontend development",
-    description: "Interfaces for the web and mobile.",
+    title: "Frontend",
     skills: [
       { name: "React", context: "NextShark Clone · this site", source: "project" },
       { name: "Next.js", context: "NextShark Clone · this site", source: "project" },
       { name: "Tailwind CSS", context: "NextShark Clone · this site", source: "project" },
-      { name: "Odoo XML views", context: "Client workflow UIs at Odoo", source: "cv" },
-      { name: "Flutter", context: "Listed on previous portfolio", source: "previous-portfolio" },
+      { name: "Odoo XML views", context: "Client workflow screens at Odoo", source: "cv" },
     ],
   },
   {
-    id: "databases",
-    code: "MOD_04",
-    title: "Databases",
-    description: "Storage, caching and search.",
+    id: "data",
+    title: "Data",
     skills: [
       { name: "PostgreSQL", context: "Odoo · TraveLoGue", source: "cv" },
       { name: "Redis", context: "Caching at Tumbuh Bersama Nano", source: "cv" },
-      { name: "MongoDB", context: "Listed on earlier CV", source: "cv" },
-      { name: "Elasticsearch", context: "Listed on earlier CV", source: "cv" },
     ],
   },
   {
-    id: "infra",
-    code: "MOD_05",
-    title: "Cloud, infra and observability",
-    description: "Cloud services, containers and monitoring.",
+    id: "cloud",
+    title: "Cloud and observability",
     skills: [
-      { name: "AWS Lambda · EventBridge · Glue", context: "Automated table archival pipeline", source: "cv" },
-      { name: "AWS S3", context: "Archival storage · SDK v2 migration", source: "cv" },
-      { name: "Datadog", context: "Service metrics at Traveloka (earlier CV)", source: "cv" },
-      { name: "GCP", context: "Listed on earlier CV", source: "cv" },
-      { name: "Docker", context: "Listed on earlier CV", source: "cv" },
-      { name: "Kubernetes", context: "Listed on earlier CV", source: "cv" },
-      { name: "Grafana", context: "Listed on earlier CV", source: "cv" },
+      { name: "AWS Lambda · EventBridge · Glue", context: "Table archival pipeline", source: "cv" },
+      { name: "AWS S3", context: "Archive storage · SDK v2 migration", source: "cv" },
+      { name: "Datadog", context: "Service metrics at Traveloka", source: "cv" },
     ],
   },
   {
     id: "practices",
-    code: "MOD_06",
-    title: "Tools and practices",
-    description: "How the work gets shipped and kept healthy.",
+    title: "Testing and delivery",
     skills: [
-      { name: "Idempotency & deduplication", context: "Duplicate-redemption protection", source: "cv" },
       { name: "Feature-controlled rollout", context: "AWS SDK migration", source: "cv" },
-      { name: "Data migration & archival", context: "Affiliate revamp · archival pipeline", source: "cv" },
-      { name: "Selenium · TestNG", context: "API & UI automation", source: "cv" },
-      { name: "TestRail", context: "Manual test case management", source: "cv" },
-      { name: "Git", context: "Listed on earlier CV", source: "cv" },
+      { name: "Selenium · TestNG", context: "API and UI automation at Global Tiket Network", source: "cv" },
+      { name: "TestRail", context: "Manual test cases at Global Tiket Network", source: "cv" },
     ],
   },
+];
+
+/**
+ * Tools listed on an earlier CV or portfolio without a concrete place of use.
+ * Shown as one plain line, with no claims attached.
+ */
+export const alsoUsed: string[] = [
+  "Docker",
+  "Kubernetes",
+  "GCP",
+  "MongoDB",
+  "Elasticsearch",
+  "Grafana",
+  "Git",
+  "Kotlin",
+  "Express",
+  "Flutter",
 ];
 
 export const projects: Project[] = [
@@ -194,12 +164,12 @@ export const projects: Project[] = [
     type: "University team project · 5 engineers",
     accent: "#4D8DFF",
     summary:
-      "A web platform where Indonesians recommend attractions, local shops, events and travel tips to foreign tourists — launched around Indonesia's 2022 G20 presidency.",
+      "A web platform where Indonesians recommend attractions, local shops, events and travel tips to foreign tourists, built around Indonesia's 2022 G20 presidency.",
     problem:
-      "Foreign visitors had no single place to find what locals actually recommend, and small local businesses (UMKM) had little exposure to tourists. TraveLoGue gives locals a platform to share recommendations and gives tourists a way to discover them.",
+      "A university team project for the 2022 G20: a place where Indonesians recommend shops, attractions and events to foreign visitors, and where small local businesses (UMKM) could get in front of tourists.",
     role: "Owner of the Recommended Local Shops module",
     contribution: [
-      "Built the Recommended Local Shops (UMKM) module end-to-end: data model, forms, views and templates.",
+      "Built the Recommended Local Shops (UMKM) module: data model, forms, views and templates.",
       "Added AJAX endpoints so logged-in users can add and remove shop recommendations without a page reload.",
       "Exposed JSON endpoints for the module so the data could also be used by a Flutter mobile client.",
     ],
@@ -210,12 +180,8 @@ export const projects: Project[] = [
         body: "Each feature (shops, attractions, events, forum, planner) lived in its own Django app, so five people could work in parallel with clear ownership.",
       },
       {
-        title: "Server-rendered pages plus JSON endpoints",
-        body: "Pages render with Django templates, while the same data is available as JSON for AJAX updates and the mobile client.",
-      },
-      {
-        title: "Login-gated writes",
-        body: "Anyone can browse recommendations; adding or deleting them requires an account.",
+        title: "Server pages plus JSON for mobile",
+        body: "Django templates for the web, and the same data as JSON so the Flutter client and the AJAX buttons could use it.",
       },
     ],
     architecture:
@@ -259,9 +225,9 @@ export const projects: Project[] = [
     type: "Personal project",
     accent: "#4D8DFF",
     summary:
-      "A recreation of the NextShark news site front page — top stories, a story carousel and category tabs — built with Next.js, TypeScript and Tailwind CSS.",
+      "A recreation of the NextShark news front page, with top stories, a story carousel and category tabs, built with Next.js, TypeScript and Tailwind CSS.",
     problem:
-      "A practice build: reproduce a real, content-heavy news layout with clean, typed React components and a data layer that loading, error and filter states can rely on.",
+      "A practice build: rebuild a busy, real news front page in Next.js, with all data loading kept out of the components.",
     role: "Sole developer",
     contribution: [
       "Built the page layout: top story, top stories sidebar, conversation section and discover area.",
@@ -272,15 +238,11 @@ export const projects: Project[] = [
     decisions: [
       {
         title: "Data access in hooks",
-        body: "Components never fetch directly; hooks own fetching, filtering and loading/error state, so the UI stays simple.",
+        body: "Components never fetch directly. Hooks own fetching, filtering and loading and error state, so the components only render.",
       },
       {
         title: "Typed news model",
         body: "News and Article interfaces follow the NewsAPI response shape, so a local JSON dataset can later be swapped for a live API.",
-      },
-      {
-        title: "Accessible primitives",
-        body: "Tabs and carousel are built on Radix UI and Embla instead of hand-rolled widgets.",
       },
     ],
     architecture:
@@ -322,15 +284,15 @@ export const experience: Experience[] = [
     start: "Nov 2025",
     end: null,
     type: "Full-time",
-    summary: "Travel Activities — affiliates, supplier payments, data reliability.",
+    summary: "Travel Activities: affiliates, supplier payments, data reliability",
     highlights: [
-      "Owned the end-to-end revamp of Travel Activities' affiliate management system: redesigned data models, APIs, authorization flows, migration logic and a validation workflow.",
-      "Extended the supplier payment system with a Payment-Per-Redemption model for voucher redemptions, hardened against duplicate redemption through SQS deduplication, database unique constraints and invoice-state validation.",
-      "Designed an automated archival pipeline using EventBridge, AWS Lambda, Glue and S3 that periodically archives historical data, reducing active table size by approximately 90%.",
-      "Built automated protection against long-running SQL queries that could exhaust the connection pool and cause transaction failures; offending queries are terminated and reported to Lark for investigation.",
-      "Modernized AWS integrations by migrating SQS, SNS and S3 flows from AWS SDK v1 to v2, using feature-controlled rollout and compatibility testing to reduce migration risk.",
+      "Rebuilt Travel Activities' affiliate management system from the data model up: new data models, APIs, authorization flows, migration logic and a validation workflow.",
+      "Added Payment-Per-Redemption to supplier payments, so suppliers are paid per voucher redemption. Protected it against paying twice with SQS deduplication, a database unique constraint and invoice-state checks.",
+      "Built a pipeline (EventBridge → Lambda → Glue → S3) that moves old rows out of a busy table on a schedule. The active table is now about 90% smaller.",
+      "Built a guard for long-running SQL queries that could exhaust the connection pool and cause transaction failures. It kills them and reports them to Lark so they can be fixed.",
+      "Moved our SQS, SNS and S3 code from AWS SDK v1 to v2. Each flow switched over behind a feature control, with compatibility tests.",
     ],
-    impact: { value: "~90%", label: "smaller active table after automated archival" },
+    impact: { value: "~90%", label: "smaller active table after archival" },
     stack: ["Java", "Spring Boot", "AWS SQS", "AWS SNS", "AWS S3", "AWS Lambda", "EventBridge", "AWS Glue", "SQL", "Lark"],
   },
   {
@@ -341,10 +303,9 @@ export const experience: Experience[] = [
     start: "Aug 2025",
     end: "Nov 2025",
     type: "Full-time",
-    summary: "Custom Odoo business applications for clients.",
+    summary: "Custom Odoo modules for client businesses",
     highlights: [
-      "Built and customized Odoo-based business applications using Python, PostgreSQL and XML views to support client-specific workflows across sales, operations and reporting modules.",
-      "Translated client requirements into custom Odoo modules, business logic and workflow improvements deployed on Odoo's cloud platform.",
+      "Built custom Odoo modules for client businesses, mostly sales, operations and reporting workflows, in Python, PostgreSQL and XML views.",
     ],
     stack: ["Python", "Odoo", "PostgreSQL", "XML views"],
   },
@@ -356,11 +317,10 @@ export const experience: Experience[] = [
     start: "Feb 2025",
     end: "Aug 2025",
     type: "Internship",
-    summary: "Performance, caching and asynchronous messaging.",
+    summary: "Caching and asynchronous messaging",
     highlights: [
-      "Improved backend performance and scalability in Java/Spring Boot services by refactoring service logic and optimizing data access patterns.",
-      "Implemented Redis caching for frequently accessed backend data, reducing repeated database calls and improving API response times.",
-      "Integrated RabbitMQ-based asynchronous messaging to decouple service communication and improve the reliability of backend event processing.",
+      "Added Redis caching for frequently read data, cutting repeated database calls.",
+      "Moved service-to-service communication onto RabbitMQ so it runs asynchronously.",
     ],
     stack: ["Java", "Spring Boot", "Redis", "RabbitMQ"],
   },
@@ -372,10 +332,10 @@ export const experience: Experience[] = [
     start: "May 2024",
     end: "Feb 2025",
     type: "Internship",
-    summary: "Manual and automated testing for transportation features.",
+    summary: "Testing tiket.com's transport features",
     highlights: [
-      "Created and maintained structured manual test cases in TestRail for web and mobile transportation features.",
-      "Built and maintained API and UI automation tests using Java, Selenium and TestNG, improving regression coverage for core transportation flows.",
+      "Wrote and maintained manual test cases in TestRail for web and mobile transport features.",
+      "Wrote API and UI automation tests in Java with Selenium and TestNG to widen regression coverage of the core transport flows.",
     ],
     stack: ["Java", "Selenium", "TestNG", "TestRail"],
   },
