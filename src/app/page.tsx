@@ -1,38 +1,30 @@
-import Hero from "./_components/Hero";
-import Projects from "./_components/Projects";
-import Techstack from "./_components/Techstack";
-import AboutMe from "./_components/AboutMe";
+import { Providers } from "@/components/layout/Providers";
+import { Backdrop } from "@/components/layout/Backdrop";
+import { Chrome } from "@/components/layout/Chrome";
+import { Footer } from "@/components/layout/Footer";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { CapabilitiesSection } from "@/components/sections/CapabilitiesSection";
+import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { EducationSection } from "@/components/sections/EducationSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
-    <>
-      <div>
-        <div  id="home" className="mb-[30px] w-[10px] invisible">
-          <button></button>
-        </div>
-        <Hero></Hero>
-      </div>
-      <div >
-        <div  id="aboutMe" className="mb-[30px] w-[10px] invisible">
-          <button></button>
-        </div>
-
-        <AboutMe></AboutMe>
-      </div>
-      <div >
-        <div  id="techstack"className="mb-[30px] w-[10px] invisible">
-          <button></button>
-        </div>
-
-        <Techstack></Techstack>
-      </div>
-      <div >
-        <div  id="projects" className="mb-[30px] w-[10px] invisible">
-          <button></button>
-        </div>
-
-        <Projects></Projects>
-      </div>
-    </>
+    <Providers>
+        <Backdrop />
+        <Chrome />
+        <main id="main">
+          <HeroSection />
+          <AboutSection />
+          <CapabilitiesSection />
+          <ProjectsSection />
+          <ExperienceSection />
+          <EducationSection />
+          <ContactSection />
+        </main>
+        <Footer />
+    </Providers>
   );
 }

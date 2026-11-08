@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NEXUS — Muhammad Raditya Hanif
 
-## Getting Started
+Interactive portfolio designed as a personal operating environment: mission-control HUD, a live 3D "core", and projects filed as engineering missions.
 
-First, run the development server:
+## Stack
+- **Next.js 15** (App Router, static export-friendly) + **React 19** + **TypeScript**
+- **Tailwind CSS 3** for styling, design tokens in `tailwind.config.ts` and `src/app/globals.css`
+- **Framer Motion** for UI, scroll and modal animation
+- **Canvas 2D** hero visual (`src/components/visuals/NexusCore.tsx`) — a hand-rolled 3D projection, so no WebGL/three.js is needed and there's nothing to fall back from
+- Self-hosted fonts via Fontsource: Space Grotesk, Inter, JetBrains Mono
 
+## Run
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build && npm start
+```
+Set `NEXT_PUBLIC_SITE_URL` in production so Open Graph URLs resolve.
+
+## Updating content
+Everything personal lives in **`src/content/profile.ts`** — profile, about panels, skills, projects, experience, education and certifications. UI components only read from it.
+
+- **CV**: replace `public/cv/Muhammad_Raditya_Hanif_CV.pdf` (or change `profile.cvPath`).
+- **Projects**: add an entry to `projects`. `outcomes`, `challenges` and `notes` are optional — empty blocks are hidden, so don't add filler.
+- **Skills**: each skill needs a `context` (where it was used) and a `source` (`cv`, `project`, `previous-portfolio`). There are deliberately no proficiency bars.
+- **Certifications**: add to `certifications`; the block appears automatically.
+
+### Content sources & things to review
+- All work history, education, skills and contact details come from the CV.
+- Project details come from the public repos ([TraveLoGue](https://github.com/TraveLoGue-f12/TraveLoGue), [NextShark Clone](https://github.com/radityahnf/nextshark)).
+- Kotlin, Express and Flutter come from the skill list on the previous version of this site.
+- The About panel texts (philosophy, approach) are written from what the CV shows — reword them in your own voice.
+- Live demo links could not be verified at build time; free-tier hosts may be offline.
+
+## Structure
+```
+src/
+  app/            layout, page, global styles
+  content/        profile.ts (all data) + types.ts
+  components/
+    layout/       IntroSequence, Chrome (nav, status, back-to-top), Backdrop, Footer, Providers
+    sections/     Hero, About, Capabilities, Projects, ProjectDetail, Experience, Education, Contact
+    visuals/      NexusCore (3D canvas), ProjectDiagram (SVG)
+    ui/           Button, Icons, SectionHeader, StatusDot, StatusBadge
+  lib/            motion presets, hooks (active section, clock), section map
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Behaviour notes
+- The intro plays once per browser session, can be skipped (button or Esc), and never plays with `prefers-reduced-motion`. It also hides itself if JavaScript fails.
+- Reduced motion: Framer Motion respects the OS setting, CSS animations are disabled, and the 3D core renders a single still frame.
+- The core pauses when off-screen or when the tab is hidden.
+- Projects open in an accessible dialog (focus trap, Esc, focus restore). Deep link with `#mission-travelogue` or `#mission-nextshark`.
+- There's no contact form on purpose — email, LinkedIn and GitHub are real links, plus a copy-email button.
