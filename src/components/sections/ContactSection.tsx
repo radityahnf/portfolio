@@ -42,7 +42,7 @@ export function ContactSection() {
           </motion.div>
           <motion.div variants={reveal} className="rule" />
 
-          <h2 id="contact-title" className="display mt-10 text-[clamp(4rem,14vw,13rem)] text-ink">
+          <h2 id="contact-title" className="display mt-10 text-[clamp(2.75rem,8.5vw,8.5rem)] text-ink">
             <span className="block overflow-hidden pb-[0.03em]">
               <motion.span variants={lineRise} className="block">
                 Open to

@@ -70,7 +70,7 @@ export function CapabilitiesSection() {
               <div key={cat.id} className="grid gap-6 border-b border-line py-8 md:grid-cols-[minmax(0,320px)_1fr] md:gap-12">
                 <div className="flex items-baseline gap-4">
                   <span className="meta">{String(ci + 1).padStart(2, "0")}</span>
-                  <h3 className="display text-3xl text-ink sm:text-4xl">{cat.title}</h3>
+                  <h3 className="display text-2xl text-ink sm:text-3xl">{cat.title}</h3>
                 </div>
                 <ul className="grid gap-x-12 sm:grid-cols-2">
                   {cat.skills.map((s) => {

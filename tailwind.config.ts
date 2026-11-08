@@ -20,10 +20,11 @@ const config: Config = {
         blood: { DEFAULT: "#A30D17", deep: "#650B12", bright: "#C7232E" },
       },
       fontFamily: {
-        display: ['"Anton"', "Impact", "sans-serif"],
-        serif: ['"Shippori Mincho"', "Georgia", "serif"],
-        sans: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
-        mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+        // Latin first; Japanese characters fall through to Shippori Mincho B1.
+        display: ['"Bodoni Moda"', '"Shippori Mincho B1"', "Didot", "serif"],
+        serif: ['"Newsreader"', '"Shippori Mincho B1"', "Georgia", "serif"],
+        sans: ['"Newsreader"', '"Shippori Mincho B1"', "Georgia", "serif"],
+        mono: ['"Azeret Mono"', "ui-monospace", "monospace"],
       },
       maxWidth: { shell: "1440px" },
       transitionTimingFunction: { cine: "cubic-bezier(0.16, 1, 0.3, 1)" },

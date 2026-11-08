@@ -58,7 +58,7 @@ function Entry({ job }: { job: Experience }) {
       </div>
 
       <div>
-        <h3 className="display text-[clamp(2.5rem,5vw,4.5rem)] text-ink">{job.role}</h3>
+        <h3 className="display text-[clamp(1.875rem,3.6vw,3.25rem)] text-ink">{job.role}</h3>
         <p className="mt-3 font-serif text-xl text-ink-2">
           {job.company}
           <span className="ml-3 font-sans text-sm text-ink-3">{job.location}</span>
@@ -77,7 +77,7 @@ function Entry({ job }: { job: Experience }) {
           <div className="space-y-8">
             {job.impact && (
               <div>
-                <p className="display text-7xl text-blood-bright">{job.impact.value}</p>
+                <p className="display text-6xl text-blood-bright">{job.impact.value}</p>
                 <p className="meta mt-3 leading-5">{job.impact.label}</p>
               </div>
             )}

@@ -75,7 +75,7 @@ export function ProjectDiagram({
               x={w / 2 + (n.kind === "data" ? 6 : 0)}
               y={h / 2 + 3.5}
               textAnchor="middle"
-              fontFamily='"IBM Plex Mono", ui-monospace, monospace'
+              fontFamily='"Azeret Mono", ui-monospace, monospace'
               fontSize={fs}
               fill={owned || core ? "#E8E3DC" : "#B4AEA7"}
             >

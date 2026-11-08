@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/anton/400.css";
-import "@fontsource/shippori-mincho/400.css";
-import "@fontsource/shippori-mincho/500.css";
-import "@fontsource/ibm-plex-sans/400.css";
-import "@fontsource/ibm-plex-sans/500.css";
-import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/bodoni-moda/800.css";
+import "@fontsource/newsreader/400.css";
+import "@fontsource/newsreader/500.css";
+import "@fontsource/shippori-mincho-b1/400.css";
+import "@fontsource/shippori-mincho-b1/500.css";
+import "@fontsource/azeret-mono/400.css";
 import "./globals.css";
 import { profile } from "@/content/profile";
 

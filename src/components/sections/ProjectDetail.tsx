@@ -99,7 +99,7 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
         <div className="overflow-y-auto overscroll-contain">
           {/* Title block */}
           <div className="px-6 pb-10 pt-10 sm:px-10 sm:pt-14">
-            <h2 id={titleId} className="display text-[clamp(3.25rem,9vw,7rem)] text-ink">
+            <h2 id={titleId} className="display text-[clamp(2.5rem,6vw,5rem)] text-ink">
               {p.name}
             </h2>
             <p className="mt-4 max-w-2xl font-serif text-xl text-ink-2">{p.tagline}</p>
