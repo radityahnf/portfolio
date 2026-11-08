@@ -32,16 +32,12 @@ export function ProjectDiagram({
     >
       <defs>
         <pattern id={`grid-${id}`} width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M20 0H0V20" fill="none" stroke="rgba(137,149,170,0.08)" strokeWidth="1" />
+          <path d="M20 0H0V20" fill="none" stroke="rgba(238,240,245,0.04)" strokeWidth="1" />
         </pattern>
-        <radialGradient id={`glow-${id}`}>
-          <stop offset="0%" stopColor={accent} stopOpacity="0.25" />
-          <stop offset="100%" stopColor={accent} stopOpacity="0" />
-        </radialGradient>
       </defs>
       <rect width={W} height={H} fill={`url(#grid-${id})`} />
 
-      {diagram.edges.map(([a, b], i) => {
+      {diagram.edges.map(([a, b]) => {
         const na = nodeMap.get(a);
         const nb = nodeMap.get(b);
         if (!na || !nb) return null;
@@ -50,17 +46,7 @@ export function ProjectDiagram({
         const d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
         return (
           <g key={`${a}-${b}`}>
-            <path d={d} fill="none" stroke="rgba(137,149,170,0.25)" strokeWidth="1" />
-            <path
-              d={d}
-              fill="none"
-              stroke={accent}
-              strokeWidth="1.2"
-              strokeDasharray="3 9"
-              className="dash-flow"
-              style={{ animationDuration: `${1.6 + (i % 3) * 0.4}s` }}
-              opacity="0.8"
-            />
+            <path d={d} fill="none" stroke="rgba(238,240,245,0.18)" strokeWidth="1" />
           </g>
         );
       })}
@@ -74,25 +60,24 @@ export function ProjectDiagram({
         const h = 22;
         return (
           <g key={n.id} transform={`translate(${x - w / 2}, ${y - h / 2})`}>
-            {(owned || core) && <circle cx={w / 2} cy={h / 2} r={w * 0.7} fill={`url(#glow-${id})`} />}
-            <rect width={w} height={h} rx="5" fill="#101624" />
+            <rect width={w} height={h} rx="6" fill="#11141c" />
             <rect
               width={w}
               height={h}
-              rx="5"
-              fill={owned ? accent : "#101624"}
-              fillOpacity={owned ? 0.16 : 1}
-              stroke={owned || core ? accent : "rgba(137,149,170,0.35)"}
-              strokeWidth={core ? 1.4 : 1}
+              rx="6"
+              fill={owned ? accent : core ? "#1a1e28" : "#11141c"}
+              fillOpacity={owned ? 0.14 : 1}
+              stroke={owned ? accent : core ? "rgba(238,240,245,0.28)" : "rgba(238,240,245,0.14)"}
+              strokeWidth="1"
             />
-            {n.kind === "data" && <path d={`M6 ${h / 2 - 3}h6M6 ${h / 2 + 3}h6`} stroke="rgba(137,149,170,0.6)" strokeWidth="1" />}
+            {n.kind === "data" && <path d={`M6 ${h / 2 - 3}h6M6 ${h / 2 + 3}h6`} stroke="rgba(238,240,245,0.35)" strokeWidth="1" />}
             <text
               x={w / 2 + (n.kind === "data" ? 6 : 0)}
               y={h / 2 + 3.5}
               textAnchor="middle"
-              fontFamily='"JetBrains Mono Variable", ui-monospace, monospace'
+              fontFamily='"IBM Plex Mono", ui-monospace, monospace'
               fontSize={fs}
-              fill={owned || core ? "#E8EDF7" : "#8995AA"}
+              fill={owned || core ? "#eef0f5" : "#a3a9b8"}
             >
               {n.label}
             </text>

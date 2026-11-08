@@ -1,28 +1,17 @@
-import type { Transition, Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 
-/** Shared easing — a calm "expo out" curve used across the site. */
-export const EASE = [0.16, 1, 0.3, 1] as const;
+/** One easing curve for the whole site. */
+export const EASE = [0.22, 1, 0.36, 1] as const;
 
-export const transition = (delay = 0, duration = 0.8): Transition => ({
-  duration,
-  delay,
-  ease: EASE,
-});
-
-export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: transition() },
+/** Section entrance: a short fade and 8px rise. */
+export const reveal: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
 };
 
-export const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: transition(0, 0.9) },
-};
-
-export const stagger = (step = 0.08, delay = 0): Variants => ({
+export const stagger = (step = 0.05): Variants => ({
   hidden: {},
-  show: { transition: { staggerChildren: step, delayChildren: delay } },
+  show: { transition: { staggerChildren: step } },
 });
 
-/** Default viewport settings for scroll reveals. */
-export const VIEWPORT = { once: true, margin: "0px 0px -12% 0px" } as const;
+export const VIEWPORT = { once: true, margin: "0px 0px -10% 0px" } as const;

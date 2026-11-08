@@ -28,10 +28,9 @@ export const profile: Profile = {
   shortName: "Raditya Hanif",
   initials: "MRH",
   title: "Software Engineer",
-  focus: "Backend · Distributed systems · Reliability",
-  headline: ["Building systems.", "Solving problems.", "Engineering possibilities."],
+  focus: "Backend software engineer at Traveloka",
   intro:
-    "Backend software engineer building reliable Java and Spring Boot services for production systems. I work across distributed systems, AWS, event-driven architecture, database optimization and observability — and I care about services that stay reliable after they ship.",
+    "I build Java and Spring Boot services for production — payment flows that can't redeem a voucher twice, data that archives itself, and guards that stop a runaway query before it takes the database down.",
   location: "Indonesia",
   timeZone: "Asia/Jakarta",
   timeZoneLabel: "WIB",
@@ -58,25 +57,25 @@ export const about: About = {
   panels: [
     {
       id: "profile",
-      label: "SYSTEM PROFILE",
+      label: "Profile",
       title: "Backend engineer, end-to-end",
       body: "I own features from data model to production: API design, authorization, migrations, validation and the support that follows — most recently the full revamp of an affiliate management system.",
     },
     {
       id: "philosophy",
-      label: "CORE PHILOSOPHY",
+      label: "Philosophy",
       title: "Assume it will fail — then make it safe",
       body: "Payments get retried and queues redeliver. When I added Payment-Per-Redemption, I guarded against duplicates at three layers: SQS deduplication, database unique constraints and invoice-state checks.",
     },
     {
       id: "focus",
-      label: "CURRENT FOCUS",
-      title: "Data health & reliability",
+      label: "Current focus",
+      title: "Data health and reliability",
       body: "Automated archival that cut an active table's size by about 90%, and a guard that terminates long-running SQL queries before they exhaust the connection pool, then reports them to Lark.",
     },
     {
       id: "approach",
-      label: "ENGINEERING APPROACH",
+      label: "Approach",
       title: "Change safely, test like QA",
       body: "Starting in QA taught me to think about how things break. Big changes — like moving SQS, SNS and S3 flows to AWS SDK v2 — ship behind feature controls with compatibility testing.",
     },
@@ -89,10 +88,10 @@ export const about: About = {
     "Observability",
   ],
   facts: [
-    { label: "ROLE", value: "Backend Software Engineer" },
-    { label: "BASE", value: "Traveloka" },
-    { label: "DEGREE", value: "B.CS., University of Indonesia" },
-    { label: "ROLES HELD", value: "4 since 2024" },
+    { label: "Role", value: "Backend Software Engineer" },
+    { label: "Company", value: "Traveloka" },
+    { label: "Degree", value: "B.CS., University of Indonesia" },
+    { label: "Roles held", value: "4 since 2024" },
   ],
 };
 
@@ -104,7 +103,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "languages",
     code: "MOD_01",
-    title: "Programming Languages",
+    title: "Programming languages",
     description: "Languages used in production work and projects.",
     skills: [
       { name: "Java", context: "Traveloka · Tumbuh Bersama Nano · QA automation", source: "cv" },
@@ -117,7 +116,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "backend",
     code: "MOD_02",
-    title: "Backend Development",
+    title: "Backend development",
     description: "Frameworks and messaging for services and APIs.",
     skills: [
       { name: "Spring Boot", context: "Traveloka · Tumbuh Bersama Nano", source: "cv" },
@@ -131,7 +130,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "frontend",
     code: "MOD_03",
-    title: "Frontend Development",
+    title: "Frontend development",
     description: "Interfaces for the web and mobile.",
     skills: [
       { name: "React", context: "NextShark Clone · this site", source: "project" },
@@ -156,7 +155,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "infra",
     code: "MOD_05",
-    title: "Cloud, Infra & Observability",
+    title: "Cloud, infra and observability",
     description: "Cloud services, containers and monitoring.",
     skills: [
       { name: "AWS Lambda · EventBridge · Glue", context: "Automated table archival pipeline", source: "cv" },
@@ -171,7 +170,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "practices",
     code: "MOD_06",
-    title: "Tools & Engineering Practices",
+    title: "Tools and practices",
     description: "How the work gets shipped and kept healthy.",
     skills: [
       { name: "Idempotency & deduplication", context: "Duplicate-redemption protection", source: "cv" },
@@ -193,7 +192,7 @@ export const projects: Project[] = [
     status: "COMPLETED",
     year: "2022",
     type: "University team project · 5 engineers",
-    accent: "#69E3FF",
+    accent: "#4D8DFF",
     summary:
       "A web platform where Indonesians recommend attractions, local shops, events and travel tips to foreign tourists — launched around Indonesia's 2022 G20 presidency.",
     problem:
@@ -258,7 +257,7 @@ export const projects: Project[] = [
     status: "COMPLETED",
     year: "2024",
     type: "Personal project",
-    accent: "#9B7BFF",
+    accent: "#4D8DFF",
     summary:
       "A recreation of the NextShark news site front page — top stories, a story carousel and category tabs — built with Next.js, TypeScript and Tailwind CSS.",
     problem:

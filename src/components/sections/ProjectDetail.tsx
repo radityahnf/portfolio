@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Project } from "@/content/types";
 import { ProjectDiagram } from "@/components/visuals/ProjectDiagram";
 import { ArrowUpRight, Close, GitHub } from "@/components/ui/Icons";
-import { StatusBadge } from "@/components/ui/StatusBadge";
 import { EASE } from "@/lib/motion";
 
 /** Full mission file for a project, shown as an accessible modal dialog. */
@@ -64,34 +63,30 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
       className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.3, delay: 0.1 } }}
+      exit={{ opacity: 0, transition: { duration: 0.2, ease: EASE } }}
+      transition={{ duration: 0.2, ease: EASE }}
     >
-      <div className="absolute inset-0 bg-void/80 backdrop-blur-md" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-base/80" onClick={onClose} aria-hidden />
 
       <motion.div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="panel relative flex max-h-[92svh] w-full max-w-5xl flex-col overflow-hidden rounded-b-none bg-navy/95 sm:max-h-[88vh] sm:rounded-xl"
-        style={{ ["--accent" as string]: p.accent }}
-        initial={{ opacity: 0, y: 60, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } }}
-        exit={{ opacity: 0, y: 40, scale: 0.98, transition: { duration: 0.35, ease: EASE } }}
+        className="relative flex max-h-[92svh] w-full max-w-5xl flex-col overflow-hidden rounded-t-2xl border border-line bg-card shadow-[0_24px_64px_rgba(0,0,0,0.5)] sm:max-h-[88vh] sm:rounded-2xl"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: EASE } }}
+        exit={{ opacity: 0, y: 8, transition: { duration: 0.2, ease: EASE } }}
       >
-        <div aria-hidden className="absolute inset-x-0 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${p.accent}, transparent)` }} />
-
         {/* Header */}
-        <div className="flex items-center gap-4 border-b border-line px-5 py-3 font-mono text-[10px] uppercase tracking-[0.14em] sm:px-8">
-          <span style={{ color: p.accent }}>{p.code}</span>
-          <StatusBadge status={p.status} />
-          <span className="hidden text-ink-faint sm:inline">Mission file · declassified</span>
+        <div className="flex h-14 items-center gap-4 border-b border-line px-6 sm:px-8">
+          <span className="meta">Case study</span>
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="ml-auto inline-flex h-9 items-center gap-2 rounded-md border border-line-strong px-3 text-ink-muted transition-colors hover:border-ink-muted hover:text-ink"
-            aria-label="Close mission file"
+            className="ml-auto inline-flex h-9 items-center gap-2 rounded-lg px-3 text-sm text-ink-2 transition-colors duration-fast hover:bg-raised hover:text-ink"
+            aria-label="Close case study"
           >
             <span className="hidden sm:inline">Close</span>
             <Close />
@@ -100,65 +95,57 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
 
         <div className="overflow-y-auto overscroll-contain">
           {/* Title block */}
-          <div className="relative px-5 pb-8 pt-8 sm:px-8 sm:pt-10">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0"
-              style={{ background: `radial-gradient(600px circle at 100% 0%, ${p.accent}18, transparent 60%)` }}
-            />
-            <h2 id={titleId} className="relative font-display text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-6xl">
+          <div className="px-6 pb-8 pt-8 sm:px-8 sm:pt-10">
+            <h2 id={titleId} className="text-[36px] font-medium leading-[1.1] tracking-[-0.02em] text-ink sm:text-[44px]">
               {p.name}
             </h2>
-            <p className="relative mt-3 max-w-2xl text-lg text-ink-muted">{p.tagline}</p>
+            <p className="mt-2 max-w-2xl text-lg text-ink-2">{p.tagline}</p>
 
-            <dl className="relative mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line font-mono text-[11px] uppercase tracking-[0.08em] md:grid-cols-4">
+            <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4">
               {[
-                ["Status", p.status],
+                ["Status", p.status.charAt(0) + p.status.slice(1).toLowerCase()],
                 ["Year", p.year],
                 ["Type", p.type],
                 ["Role", p.role],
               ].map(([k, v]) => (
-                <div key={k} className="bg-navy px-4 py-3">
-                  <dt className="text-ink-faint">{k}</dt>
-                  <dd className="mt-1 normal-case tracking-normal text-ink">{v}</dd>
+                <div key={k} className="bg-card px-4 py-3">
+                  <dt className="meta">{k}</dt>
+                  <dd className="mt-1 text-sm text-ink">{v}</dd>
                 </div>
               ))}
             </dl>
           </div>
 
-          <div className="grid gap-10 px-5 pb-10 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
+          <div className="grid gap-10 px-6 pb-10 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
             <div className="space-y-10">
-              <Block label="01 · Overview">
+              <Block label="Overview">
                 <p>{p.summary}</p>
               </Block>
-              <Block label="02 · Problem">
+              <Block label="Problem">
                 <p>{p.problem}</p>
               </Block>
-              <Block label="03 · My contribution">
+              <Block label="My contribution">
                 <ul className="space-y-3">
                   {p.contribution.map((c) => (
                     <li key={c} className="flex gap-3">
-                      <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rotate-45" style={{ background: p.accent }} aria-hidden />
+                      <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-ink-3" aria-hidden />
                       <span>{c}</span>
                     </li>
                   ))}
                 </ul>
               </Block>
-              <Block label="04 · Key engineering decisions">
+              <Block label="Key decisions">
                 <div className="grid gap-3">
-                  {p.decisions.map((d, i) => (
-                    <div key={d.title} className="rounded-lg border border-line bg-void/40 p-4">
-                      <p className="flex items-baseline gap-3 font-display text-base font-semibold text-ink">
-                        <span className="font-mono text-[10px] text-ink-faint">D{i + 1}</span>
-                        {d.title}
-                      </p>
-                      <p className="mt-1.5 text-[15px] text-ink-muted">{d.body}</p>
+                  {p.decisions.map((d) => (
+                    <div key={d.title} className="rounded-xl border border-line bg-base p-4">
+                      <p className="font-medium text-ink">{d.title}</p>
+                      <p className="mt-1 text-ink-2">{d.body}</p>
                     </div>
                   ))}
                 </div>
               </Block>
               {p.challenges && p.challenges.length > 0 && (
-                <Block label="05 · Challenges">
+                <Block label="Challenges">
                   <ul className="list-disc space-y-2 pl-5">
                     {p.challenges.map((c) => (
                       <li key={c}>{c}</li>
@@ -178,17 +165,17 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
             </div>
 
             <aside className="space-y-8">
-              <div className="rounded-xl border border-line bg-void/50 p-4">
-                <p className="label mb-3">Architecture · {p.diagram.title}</p>
+              <div className="rounded-xl border border-line bg-base p-4">
+                <p className="meta mb-3">Architecture: {p.diagram.title.charAt(0).toLowerCase() + p.diagram.title.slice(1)}</p>
                 <ProjectDiagram id={`detail-${p.id}`} diagram={p.diagram} accent={p.accent} detailed className="h-auto w-full" />
-                <p className="mt-4 text-sm leading-relaxed text-ink-muted">{p.architecture}</p>
+                <p className="mt-4 text-sm text-ink-2">{p.architecture}</p>
               </div>
 
               <div>
-                <p className="label mb-3">Technologies</p>
+                <p className="meta mb-3">Technologies</p>
                 <ul className="flex flex-wrap gap-1.5">
                   {p.stack.map((t) => (
-                    <li key={t} className="chip text-ink">
+                    <li key={t} className="tag">
                       {t}
                     </li>
                   ))}
@@ -201,7 +188,7 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
                     href={p.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-11 items-center justify-between rounded-lg border border-line-strong px-4 font-mono text-xs uppercase tracking-[0.08em] text-ink transition-colors hover:border-ink-muted"
+                    className="flex h-11 items-center justify-between rounded-lg border border-line-strong bg-raised px-4 text-sm text-ink transition-colors duration-fast hover:border-ink-3/40"
                   >
                     <span className="flex items-center gap-2">
                       <GitHub /> Source code
@@ -214,8 +201,7 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
                     href={p.links.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-11 items-center justify-between rounded-lg px-4 font-mono text-xs uppercase tracking-[0.08em] text-void transition-all hover:brightness-110"
-                    style={{ background: p.accent }}
+                    className="flex h-11 items-center justify-between rounded-lg bg-ink px-4 text-sm font-medium text-page transition-colors duration-fast hover:bg-white"
                   >
                     Live demo <ArrowUpRight />
                   </a>
@@ -223,9 +209,9 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
               </div>
 
               {p.notes && p.notes.length > 0 && (
-                <ul className="space-y-1 font-mono text-[11px] leading-relaxed text-ink-faint">
+                <ul className="meta space-y-1">
                   {p.notes.map((n) => (
-                    <li key={n}>{"// "}{n}</li>
+                    <li key={n}>{n}</li>
                   ))}
                 </ul>
               )}
@@ -240,11 +226,8 @@ function DetailDialog({ project: p, onClose }: { project: Project; onClose: () =
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <section>
-      <h3 className="label mb-3 flex items-center gap-3">
-        {label}
-        <span className="h-px flex-1 bg-line" />
-      </h3>
-      <div className="text-pretty leading-relaxed text-ink-muted">{children}</div>
+      <h3 className="meta mb-3">{label}</h3>
+      <div className="text-pretty text-ink-2">{children}</div>
     </section>
   );
 }

@@ -14,14 +14,9 @@ const IntroContext = createContext<{ done: boolean }>({ done: true });
 export const useIntro = () => useContext(IntroContext);
 
 import { INTRO_STORAGE_KEY } from "@/lib/constants";
-const DURATION_MS = 2300;
+const DURATION_MS = 1600;
 
-const BOOT_LINES = [
-  "init kernel.identity",
-  "mount /systems /projects /experience",
-  "link capabilities.registry",
-  "establish uplink",
-];
+const BOOT_LINES = ["Loading profile", "Loading experience", "Loading projects", "Ready"];
 
 export function IntroProvider({ children }: { children: React.ReactNode }) {
   // `pending` until we know on the client whether to play the intro.
@@ -82,53 +77,33 @@ function IntroOverlay({ onDone, active }: { onDone: () => void; active: boolean 
 
   return (
     <motion.div
-      className="nexus-intro fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-void"
+      className="nexus-intro fixed inset-0 z-[100] flex items-center justify-center bg-page"
       role="dialog"
       aria-modal="true"
       aria-label="NEXUS intro"
-      exit={{ opacity: 0, transition: { duration: 0.7, ease: EASE } }}
+      exit={{ opacity: 0, transition: { duration: 0.4, ease: EASE } }}
     >
-      <div className="absolute inset-0 bg-grid mask-radial opacity-70" aria-hidden />
       <motion.div
-        aria-hidden
-        className="absolute inset-0 m-auto h-[46vmin] w-[46vmin] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(77,141,255,0.22), transparent 65%)" }}
-        animate={{ scale: [0.9, 1.05, 0.9] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <motion.div
-        className="relative w-[min(88vw,420px)]"
-        initial={{ opacity: 0, y: 12 }}
+        className="w-[min(88vw,400px)]"
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 1.04, filter: "blur(6px)", transition: { duration: 0.6, ease: EASE } }}
-        transition={{ duration: 0.6, ease: EASE }}
+        transition={{ duration: 0.4, ease: EASE }}
       >
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <p className="label mb-2">SYS / BOOT SEQUENCE</p>
-            <p className="font-display text-5xl font-semibold tracking-[0.2em] text-ink sm:text-6xl">
-              NEXUS
-            </p>
-          </div>
-          <p className="font-mono text-3xl font-light tabular-nums text-cyan">{String(pct).padStart(3, "0")}</p>
+        <div className="mb-6 flex items-end justify-between">
+          <p className="text-[40px] font-medium leading-none tracking-[0.04em] text-ink">NEXUS</p>
+          <p className="font-mono text-sm tabular-nums text-ink-2">{pct}%</p>
         </div>
 
         <div className="relative h-px w-full bg-line" aria-hidden>
-          <div
-            className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue via-cyan to-violet shadow-[0_0_12px_rgba(105,227,255,0.8)]"
-            style={{ width: `${pct}%` }}
-          />
+          <div className="absolute inset-y-0 left-0 bg-accent" style={{ width: `${pct}%` }} />
         </div>
 
-        <ul className="mt-6 h-[104px] space-y-1.5 font-mono text-xs text-ink-muted" aria-live="off">
+        <ul className="mt-6 h-24 space-y-2 font-mono text-xs text-ink-3" aria-live="off">
           {BOOT_LINES.slice(0, visibleLines).map((line) => (
-            <motion.li key={line} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className="flex justify-between">
-              <span>
-                <span className="text-blue">›</span> {line}
-              </span>
-              <span className="text-ok">OK</span>
-            </motion.li>
+            <li key={line} className="flex justify-between">
+              <span>{line}</span>
+              <span className="text-positive">ok</span>
+            </li>
           ))}
         </ul>
       </motion.div>
@@ -137,9 +112,9 @@ function IntroOverlay({ onDone, active }: { onDone: () => void; active: boolean 
         ref={skipRef}
         type="button"
         onClick={onDone}
-        className="absolute bottom-6 right-4 rounded-md border border-line-strong bg-slate/70 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-ink-muted transition-colors hover:border-cyan/60 hover:text-ink sm:bottom-8 sm:right-8"
+        className="absolute bottom-6 right-4 inline-flex h-9 items-center gap-2 rounded-lg border border-line-strong px-4 text-sm text-ink-2 transition-colors duration-fast hover:text-ink sm:bottom-8 sm:right-8"
       >
-        Skip intro <span className="ml-1 text-ink-faint">[esc]</span>
+        Skip intro <span className="font-mono text-xs text-ink-3">Esc</span>
       </button>
     </motion.div>
   );

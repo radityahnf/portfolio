@@ -3,16 +3,6 @@
 @tailwind utilities;
 
 :root {
-  --void: #080b12;
-  --navy: #101624;
-  --slate: #151e2e;
-  --blue: #4d8dff;
-  --violet: #9b7bff;
-  --cyan: #69e3ff;
-  --ink: #e8edf7;
-  --muted: #8995aa;
-  --line: rgba(137, 149, 170, 0.16);
-  --nav-h: 72px;
   color-scheme: dark;
 }
 
@@ -20,182 +10,49 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background: var(--void);
+    background: #0b0d14;
   }
   body {
-    @apply bg-void font-sans text-ink antialiased;
+    @apply bg-page font-sans text-[15px] leading-relaxed text-ink antialiased;
     overflow-x: clip;
-    text-rendering: optimizeLegibility;
   }
   section[id] {
-    scroll-margin-top: 24px;
+    scroll-margin-top: 64px;
   }
   ::selection {
-    background: rgba(77, 141, 255, 0.35);
+    background: rgba(77, 141, 255, 0.3);
     color: #fff;
   }
   :focus-visible {
-    outline: 2px solid var(--cyan);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  /* Scrollbar */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(137, 149, 170, 0.3) transparent;
+    outline: 2px solid #4d8dff;
+    outline-offset: 2px;
+    border-radius: 6px;
   }
 }
 
 @layer components {
-  /* Shared page shell width + gutters */
   .shell {
-    @apply mx-auto w-full max-w-shell px-4 sm:px-6 lg:px-10;
+    @apply mx-auto w-full max-w-shell px-4 sm:px-6 lg:px-8;
   }
-
-  /* Small monospaced system label */
-  .label {
-    @apply font-mono text-2xs uppercase text-ink-muted;
+  /* Quiet meta text: mono, sentence case, muted */
+  .meta {
+    @apply font-mono text-xs leading-4 text-ink-3;
   }
-
-  /* Translucent technical panel */
-  .panel {
-    @apply relative rounded-xl border border-line bg-navy/60 backdrop-blur-md;
-    box-shadow:
-      inset 0 1px 0 rgba(232, 237, 247, 0.04),
-      0 20px 60px -30px rgba(0, 0, 0, 0.8);
+  .card {
+    @apply rounded-2xl border border-line bg-card;
   }
-
-  /* Hairline corner brackets for HUD frames */
-  .brackets {
-    position: relative;
-  }
-  .brackets::before,
-  .brackets::after {
-    content: "";
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border-color: rgba(105, 227, 255, 0.55);
-    pointer-events: none;
-  }
-  .brackets::before {
-    top: -1px;
-    left: -1px;
-    border-top: 1px solid;
-    border-left: 1px solid;
-    border-top-left-radius: 6px;
-  }
-  .brackets::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
-    border-bottom-right-radius: 6px;
-  }
-
-  .chip {
-    @apply inline-flex items-center gap-1.5 rounded-md border border-line bg-slate/70 px-2 py-1 font-mono text-[11px] leading-none text-ink-muted;
-  }
-
-  .grad-text {
-    background: linear-gradient(100deg, #b9cfff 0%, #69e3ff 45%, #9b7bff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  /* Animated gradient border used on hover */
-  .glow-border {
-    position: relative;
-    isolation: isolate;
-  }
-  .glow-border::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: radial-gradient(
-      320px circle at var(--mx, 50%) var(--my, 50%),
-      var(--accent, rgba(105, 227, 255, 0.7)),
-      transparent 60%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .glow-border:hover::before,
-  .glow-border:focus-within::before {
-    opacity: 1;
+  .tag {
+    @apply inline-flex items-center rounded-md border border-line bg-raised px-2 py-1 font-mono text-xs leading-4 text-ink-2;
   }
 }
 
-@layer utilities {
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(137, 149, 170, 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(137, 149, 170, 0.07) 1px, transparent 1px);
-    background-size: 64px 64px;
-  }
-  .bg-grid-fine {
-    background-image:
-      linear-gradient(to right, rgba(137, 149, 170, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(137, 149, 170, 0.05) 1px, transparent 1px);
-    background-size: 16px 16px;
-  }
-  .mask-fade-y {
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
-    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
-  }
-  .mask-radial {
-    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-  }
-  .text-balance {
-    text-wrap: balance;
-  }
-  .text-pretty {
-    text-wrap: pretty;
-  }
-}
-
-/* Film grain overlay */
-.grain {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
-/* Intro: hidden when skipped (set by an inline script before paint),
-   and auto-hidden after a few seconds as a failsafe if scripts never run. */
+/* Intro: hidden when skipped (set before paint) and auto-hidden as a failsafe
+   if scripts never run. */
 html[data-intro="skip"] .nexus-intro {
   display: none;
 }
 .nexus-intro {
-  animation: introFailsafe 0.4s ease 6s forwards;
+  animation: introFailsafe 0.3s ease 6s forwards;
 }
 @keyframes introFailsafe {
   to {
@@ -205,11 +62,13 @@ html[data-intro="skip"] .nexus-intro {
   }
 }
 
-.dash-flow {
-  animation: dashFlow 1.4s linear infinite;
-}
-@keyframes dashFlow {
-  to {
-    stroke-dashoffset: -12;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
   }
 }

@@ -1,28 +1,29 @@
 import { profile } from "@/content/profile";
-import { StatusDot } from "@/components/ui/StatusDot";
 
 export function Footer() {
-  const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-line">
-      <div className="shell flex flex-col gap-4 py-8 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+    <footer className="border-t border-line">
+      <div className="shell flex flex-col gap-4 py-8 text-sm text-ink-3 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          © {year} {profile.name}
+          © {new Date().getFullYear()} {profile.name}
         </p>
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <a href={profile.links.github.href} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-            GitHub
-          </a>
-          <a href={profile.links.linkedin.href} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-            LinkedIn
-          </a>
-          <a href={`mailto:${profile.email}`} className="hover:text-ink">
-            Email
-          </a>
-          <span className="flex items-center gap-2 text-ink-muted">
-            <StatusDot /> NEXUS v1.0 · online
-          </span>
-        </div>
+        <ul className="flex gap-6">
+          <li>
+            <a href={profile.links.github.href} target="_blank" rel="noopener noreferrer" className="transition-colors duration-fast hover:text-ink">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href={profile.links.linkedin.href} target="_blank" rel="noopener noreferrer" className="transition-colors duration-fast hover:text-ink">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${profile.email}`} className="transition-colors duration-fast hover:text-ink">
+              Email
+            </a>
+          </li>
+        </ul>
       </div>
     </footer>
   );

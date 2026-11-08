@@ -19,9 +19,8 @@ export interface Profile {
   shortName: string;
   initials: string;
   title: string;
-  /** One-line focus shown under the title. */
+  /** Short line above the name, e.g. current role. */
   focus: string;
-  headline: string[];
   intro: string;
   location: string;
   /** IANA time zone used by the local-time readout. */
